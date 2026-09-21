@@ -1,0 +1,11 @@
+{
+  "name": "OdinHatesLitter",
+  "version_number": "1.5.1",
+  "website_url": "https://github.com/VariantCreator/OdinHatesLitter",
+  "description": "Face Odin's cleanup trials, biome waves or a single boss inside an event dome. Personal Epic Loot rewards, configurable returns and automatic server sync.",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2350",
+    "ValheimModding-Jotunn-2.30.1",
+    "RandyKnapp-EpicLoot-0.14.10"
+  ]
+}

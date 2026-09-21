@@ -1,0 +1,15 @@
+Copyright (c) 2026 Dova (VariantCreator). All rights reserved.
+
+You may download and install the official, unmodified Odin Hates Litter releases
+for your own gameplay and on Valheim servers you run.
+
+No other permission is granted to use, modify, distribute, sell, or include this
+mod's original source code or artwork in another project without prior written
+permission from Dova (VariantCreator).
+
+This notice does not restrict rights granted by applicable law or GitHub's Terms
+of Service, including viewing and forking a public repository on GitHub.
+
+Third-party components retain their own licenses. ServerSync is covered by
+lib/ServerSync-LICENSE.txt in the source and ServerSync-LICENSE.txt beside the
+plugin in official releases.
