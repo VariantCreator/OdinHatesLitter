@@ -2,164 +2,118 @@
 
 File: `BepInEx/config/Dova.OdinHatesLitter.cfg`
 
-**Multiplayer:** server settings apply automatically. Only admins can change them; hosts control their own worlds. Install this build on the server and every client, with BepInEx, Jotunn, and Epic Loot 0.14.10 or newer.
+Install the same build on the server and every client. Server settings sync automatically; only admins and hosts can change them. Configuration Manager is opened with **F1**.
 
-With Configuration Manager, open **F1 > Odin Hates Litter > Admin and server** to check sync, preview rewards, clear your own wrath, or use **Reset all timers**. These controls are for admins and hosts.
+## Event modes
 
-The menu groups settings into 13 categories. Existing config-file sections and saved values remain unchanged; the full file reference below uses those original section names.
-
-| Menu category | Includes |
+| Mode | What it does |
 | --- | --- |
-| General and display | Messages, wrath meter, event counter and screen position |
-| Admin and server | Sync, admin overrides and public bin approval |
-| Wrath and encounters | Dropped items, warnings, timers, fury and forgiveness |
-| Enemies | Counts, scaling, spawn distances and loot chance per biome |
-| Enemy waves | Wave mode, total waves, timing, mini-bosses and single-boss events |
-| Biome creatures | Enemy, mini-boss and single-boss lists for every biome |
-| Atmosphere | Music, storms and event outline |
-| Cleanup | Litter, placement, hints and replacement piles |
-| Litter Bin | Crafting, offerings, trials and individual bin settings |
-| Ocean | Sea enemies, sailing area and crew rewards |
-| Rewards | Participation, return limits, Wacky MMO XP, items and stamina blessing |
-| Biome rewards | Ordinary and Epic Loot materials |
-| Equipment rewards | Gear chances, equipment lists and rarities |
+| Wrath | Dropping items builds wrath. Odin gives players time to clean up before enemies arrive. |
+| Cleanup Trial | A bin offering starts a litter collection event with enemies. |
+| Endless Raid | Combat waves continue until the timer ends, unless you choose another wave rule. |
+| Ocean Battle | Sea combat with its own enemies, sailing radius, waves and rewards. No litter collection. |
+| Ocean Endless Raid | A crafted Sea Offering starts a separate sea raid. Survival waves by default. |
+| Boss Raid | A chosen boss, with optional phases and reinforcements. |
 
-The event display starts lower to leave room for status effects. Adjust **General and display > Distance from top of screen (pixels)** to move it. Larger values move it down.
+In shudnal's Configuration Manager split view, expand a mode folder to see its categories: enemy spawning, enemy strength, drops, waves, mini-bosses, rewards, music, weather and more. Ocean has two folders: **Judgment** and **Endless Raid**. Searching shows matching settings inside closed folders. Other managers and list view keep labeled categories. Only relevant settings appear; existing keys and values are kept.
 
-Old defaults upgrade automatically. Custom settings stay in place.
+Both Ocean modes have independent enemies, waves, sailing radius, drops, rewards, XP, atmosphere and messages. Neither has litter piles, bin offerings, cleanup rewards or terrain-placement controls. F1 shows settings wherever you stand. Sea encounters apply in Ocean water or on a Leviathan, even if its seabed reports another biome. A land bin's selected enemy biome cannot turn it into an Ocean encounter.
 
-Default wrath is 100. Peaceful cleanup grants the base rewards; combat doubles coins and materials. The bin and HUD count litter carried by other connected players when showing your remaining target. Music and weather are together under Atmosphere; detailed logs are under Server.
+Old Ocean settings that used land waves are copied into independent sea wave settings during the upgrade. Later land changes do not change sea battles.
 
-## New in 1.5.1
+### Sea Offering
 
-- **Rewards > Participation:** Three returns after death by default. A fourth death locks that player outside the event until it ends. Ordinary respawns and Resurrection share the allowance. Reconnecting does not reset it. Graves can be recovered after the event.
-- **Enemy waves:** Turn on **Spawn a single boss instead of waves** for one biome champion with no adds or later waves. Adjust its health here and choose creatures under **Biome creatures**. Land cleanup still applies.
-- **Enemies:** Each biome has an enemy loot percentage. **Allow normal enemy drops** must also be on. This is one chance per enemy for its normal drop bundle, including Epic Loot, and does not change completion rewards.
-- **Rewards:** **Wacky MMO experience from event enemies (%)** defaults to one third. It applies once to kill XP and group shares; other XP is unchanged.
-- **Bin settings:** Opening a placed bin shows its own panel to admins and the host. Set event radius and litter distances, preview its boundary, or approve public base access. Each bin keeps its own settings across restarts. Changing or resetting one bin leaves the others alone. The server saves and syncs changes; the nearby-bin controls in F1 still work.
-- **Admin and server:** Admin bins are protected from damage and accidental removal, including debug mode. Empty the bin and finish its event, then use **Remove this bin > Confirm removal** in its settings. Materials are not returned.
-- Events resume from the last world save after a restart, with the timer paused while offline. Keep the server's `BepInEx/config/Dova.OdinHatesLitter.events` folder with its world backups.
-- Enemies spread around the full circle within their configured spawn distances. Fixed-wave events show the total and waves left.
+Craft a **Sea Offering** at a level-one workbench. The default recipe is **Coins 20, Resin 10, Chitin 5**. Use it in the Ocean to preview the raid; use it again within 20 seconds to confirm. Starting consumes one offering. Rejected starts return it, with overflow kept afloat.
 
-## Event dome
+Open **Ocean > Endless Raid > Sea Offering** for crafting materials, permissions, event duration, arrival warning and player cooldown. Defaults are ten minutes total, a 30-second arrival warning and a 15-minute start cooldown. The warning counts toward the event timer. Music, weather and boundary follow that same timer. **Waves** controls survival, fixed waves or a single wave. Ordinary Ocean judgments keep their existing behavior and separate cooldown.
 
-An invisible wall follows the event circle and has a closed roof. Players inside get a 10-second warning before it seals. Leave during that warning or stay until the event ends. Late helpers can enter by default; entering commits them too. Event enemies stay inside, and a brief golden ripple shows where players or their boat touch the wall.
+Crafting accepts up to eight `PrefabName amount` entries, separated by commas. Missing materials disable the recipe until they become available or the recipe is corrected. Recipe changes sync automatically. Server admins can restrict using offerings to admins while still letting other players help.
 
-Three returns allow the starting life plus three revives or normal respawns. After the fourth death, entry and Resurrection inside that event are blocked until it ends. Death still allows normal respawning. If an exhausted player's bed is inside, the mod chooses an outside spawn before the player appears. Portals cannot bypass the dome. Return counts and participation persist through reconnects and server restarts.
+Existing settings are copied into the new modes on the first load. Later changes to one mode do not change the others. Endless Raid starts with **Survive timer** when the old wave setting was **Single wave**.
 
-Ocean domes wait until combat starts, allowing the warning to follow the boat. The crew's boat follows the boundary too. The dome disappears with the event; it does not add time to the ten-minute event limit.
+Config-file keys inside each mode use `Original section / Setting name`. For example, `[Boss Raid]` contains `Event creatures / Enemy damage multiplier`. The full reference below lists the original sections and defaults to help find each setting. Hidden legacy entries remain for migration; use the mode entries for new changes.
 
-Find the **Dome** settings under **Atmosphere**. Adjust the seal warning, late entry, player and enemy confinement, height and messages. **Admins can cross the dome** is off by default and provides a maintenance bypass without restoring returns or rewards. Turning off **Enable event dome** releases all domes immediately. All of these settings are controlled and synced by the server.
+## Blessings
 
-## Start here
+Each event mode has a **Blessings** section for **Odin's Forgiveness**. Set **Extra stamina regeneration (%)**, **Extra health regeneration (%)** and **Extra Eitr regeneration (%)** independently from 0 to 200. Zero disables that type. The default remains 15% stamina regeneration for 180 seconds; health and Eitr start at zero.
 
-| You want to change | Section and setting |
-| --- | --- |
-| Time to retrieve an item | Wrath → Pickup grace period (seconds) |
-| How often Odin visits | Wrath → Wrath required for a visit; Encounters → Encounter cooldown (seconds) |
-| Solo and group difficulty | Enemies → Solo enemy count, Enemies added per extra player, Enemy limit including fury |
-| Repeating waves, growth and limits | Enemy waves |
-| Creatures and chances in each biome | Biome enemies |
-| One boss or champion per wave | Wave bosses; Biome wave bosses |
-| Admin events near bases or wards | Admin tools |
-| A particular bin's event and search radius | Open the bin's admin panel, or Litter Bin → Individual bin settings |
-| Litter radius, spacing, rock tops and layout | Cleanup placement |
-| Help finding missing piles | Cleanup → Show hints for missing litter |
-| Visible event outline | Atmosphere → Show event boundary |
-| Event wall, late entry and seal warning | Event dome (under Atmosphere in F1) |
-| CLLC difficulty and creature loot | Enemies → Use CLLC enemy levels, Allow normal enemy drops |
-| Reward size | Rewards → Main reward amount per player, Extra coins per biome tier; Combat rewards → Combat item reward multiplier |
-| Reward cooldowns | Rewards → Cleanup reward cooldown (seconds); Combat rewards → Combat reward cooldown (seconds) |
-| Stamina strength and duration | Stamina blessing |
-| Equipment drop chance | Epic Loot equipment → Equipment chance per player (%) |
-| Bin building materials and who can build it | Litter Bin → Building materials, Only admins can build bins |
-| Pile count and returning litter | Cleanup; Litter Bin > Litter piles to clean |
-| Litter placement on hills and near plants | Cleanup placement → Allow uneven ground, Avoid trees and bushes, Plant clearance |
-| Replacement litter when pickups stop | Cleanup → Time without finding litter (seconds), Time between replacement piles (seconds) |
-| Cleanup trial cost and timing | Litter Bin |
-| Trial shortcut | Litter Bin > Trial shortcut modifier |
-| Event countdown | Display > Show event timer |
-| Odin warning text | Messages > Litter warning lines, Land arrival lines, Ocean arrival lines, Fury lines |
-| Better trial equipment chance | Litter Bin rewards |
-| Serpents and sailing room | Ocean |
-| Who qualifies for rewards | Participation |
-| Fewer popups | Messages |
-| Ignore items such as stone | Drop protection → Ignored item prefabs |
+All enabled types use **Blessing duration (seconds)** and the same reward cooldown. Health improves normal regeneration rather than providing an instant heal. Eitr regeneration does not create an Eitr pool. The tooltip lists the enabled bonuses. Changes sync automatically; only admins and hosts can edit them. Each mode and admin bin can have different values. Existing stamina settings, presets and bin overrides are retained under the new name.
 
-## How rewards work
+## Each admin bin
 
-Each eligible player earns their own coins, materials, and 15% stamina regeneration for 3 minutes. The base coin reward is 60, with larger material bundles. Combat doubles ordinary item rewards. Separate cleanup and trial item multipliers can adjust those amounts. Cleanup and combat reward cooldowns are separate and default to zero, allowing rewards for every completed event. At sea, rewards go into your inventory; overflow floats.
+Open the bin's inventory to see its admin menu. Regular players cannot see or use these controls.
 
-Wrath resets when a judgment starts and when the encounter ends, including a timeout. Death or leaving does not cancel an active event; other players can finish it. Event summons disappear at the end. The cleanup countdown stays visible while Odin waits; the wrath meter clears afterward. Old litter does not start another encounter.
+- **Area:** event radius, inner and outer litter distances, and a boundary preview.
+- **Event:** cleanup, endless raid or boss raid; an independent event length up to 120 minutes.
+- **Creatures:** a land biome, boss prefab and boss health multiplier. Ocean remains separate.
+- **Access:** public use near bases, approval and deliberate removal of an empty bin.
+- **Name, preset and raid phases:** name the event, choose a saved preset, edit phases, copy settings, set messages and override individual settings.
 
-Creature Level and Loot Control is optional. Its level roll follows the installed CLLC settings, while repeat-offender stars act as a minimum. Other CLLC effects and infusions apply, but splitting and spawn multipliers cannot add enemies to the wave. Turn on Allow normal enemy drops to use the ordinary loot rules, including CLLC's loot settings. Separate per-player rewards still apply.
+Save Area or Event/Creatures changes using that page's Save button. Save detailed overrides with **Save this bin**. Editing is locked during an active event. Admin bins are protected from accidental damage or debug removal; use the confirmed removal button after emptying the bin and finishing its event.
 
-Shared biome materials apply to both outcomes. Extra cleanup items and Extra combat items are separate tables. Each outcome also has its own item-bundle chance. For entirely custom outcome tables, set the main reward amount to zero and turn off biome and Epic Loot material rewards.
+Settings resolve in this order: **this bin's overrides, its named preset, its event mode, inherited defaults**. A star beside a detailed setting means this bin overrides it. **Use inherited values for this category** clears that category's overrides. Other bins are unaffected.
 
-Item table format: `IronScrap 6-10, Chain 1-2 @ 50%`. Amounts are per player, not shared. Use the item's prefab name. Empty tables add nothing; unavailable prefabs are skipped. Bundles are limited to 24 item types and 64 dropped stacks per player.
+Admin bins have their own event cooldowns. A finished event does not block another ready bin. Ordinary bins also use the player's trial cooldown. Completion reward cooldowns are separate.
 
-Epic Loot is required on the server and clients. Equipment has a 15% chance after combat or 40% after a Litter Bin trial. Pools include weapons, shields and armor, including compatible loaded gear. Equipment follows player and world progress by default. Mythic and Ancient are available in later biomes. The server rolls each player's item and effects.
+Regular players' bins always use their local biome. An admin may change an approved bin's enemy and completion-reward biome. Progression still limits rewards, not the selected enemies.
 
-Build a Litter Bin with 10 wood and 5 stone in an open area away from bases and wards. Put 20 accepted materials inside, close it, then use the challenge action shown on the bin (Alt + E by default; change Trial shortcut modifier to use Ctrl or Shift). Pick up the six mission piles, press E at the bin to deposit them, and defeat the wave within 10 minutes. Placed-bin trials start their wave immediately; the two-minute warning applies only to automatic wrath encounters. Piles spread around the bin; the configurable maximum is 100. Litter is an inventory item with a base stack size of 50; stack-size mods can increase it. Keep it in your main inventory when returning it. Death sends it through the normal tombstone system, and another player can return recovered or traded litter. Piles use open ground all around the bin and avoid low plants and bushes. High tree canopies no longer block the whole clearing. Allow uneven ground skips slope and height checks; Avoid trees and bushes and Plant clearance control foliage checks. Solid trunks, structures and water remain blocked. The bin cannot be damaged or removed during its event. Protection ends with the event, after completion or its ten-minute limit. Placed bins remain afterward; Odin's temporary bins disappear. Changing the event time limit also changes the protection duration. The bin has a 15-minute trial cooldown; reward cooldowns still apply. Failed starts return the offering, but abandoning a started trial does not.
+## Boss phases and adds
 
-Regular land judgments summon their own temporary return bin and mission piles; the original dropped items are not the mission objective.
+Choose **Boss raid**, save a boss prefab, then enable **Use this bin's raid phases** in the detailed editor. Use the arrows to edit up to six phases. The first phase sets starting attributes. Later phases trigger once when the boss reaches the configured health percentage **or** the current phase reaches its time trigger. Zero disables a trigger.
 
-Ocean judgments can begin while standing, seated, or steering a boat in the Ocean biome. Odin appears above the water beside the bow and follows the boat during his warning. His apparition does not require a deep-water spawn point; serpents still need suitable water. These events are combat only, without mission litter or a temporary bin. They start with one serpent for a solo player, add one per nearby helper, and cap at three. The area extends 140 metres to give you room to sail.
+Each phase has a warning, stars, health and damage multipliers, minimum health refill, CLLC choices and reinforcements. For a rage phase at half health, use a 50% health trigger, 100% refill and the extra stars you want. Refills do not repeat after a restart. Health multipliers replace the previous phase's multiplier; they do not compound each phase.
 
-To qualify on land by default, deal 20 damage to judgment enemies or return one mission litter pile. At sea, living nearby crew also qualify, including the person steering. Reward nearby crew and Crew participation time control this option. Stay alive and nearby until the encounter finishes. The progress display shows contribution eligibility; reward cooldowns still apply.
+**Invulnerability after transition (seconds)** defaults to **5** for each later phase. The boss is also protected throughout that phase's warning, including from poison and burning already applied. Set it to zero to disable transition protection. Remaining protection pauses with the event during a restart.
 
-Wrath begins to fade after 10 minutes without more litter, then loses one point each minute. It pauses during warnings and combat. Repeated visits can strengthen one enemy: the first two visits have no extra star, the third can have one. An hour between visits clears this count.
+Adds support **1–20 creatures per call**, an alive limit, a weighted enemy list and either a repeating interval or explicit times such as `20,60,120` seconds after the phase begins. Explicit times replace the interval. The event's overall enemy cap and time limit still apply. Old adds may be cleared on transition. The event ends when its main boss is defeated and its other objectives are complete.
 
-Shuffle encounter music uses the editable Music playlist for any biome. Readable boss names and Event 1 through Event 4 work, as do exact loaded track names. The default is one looping track per event; set Time between music tracks above zero to enable mid-event changes. All nearby players follow the same order. Normal cinematic and real boss priorities still apply.
+CLLC choices come from the installed version. Creature effects apply to creature champions; true bosses use boss affixes. Effects that create untracked copies are excluded. CLLC is optional; stars and ordinary attributes work without it.
 
-Shuffle storms chooses independently from Storm playlist. Match event duration keeps the music and weather tied to the event countdown. Turning it off uses Atmosphere duration instead. Both stop when the event finishes. Each new event gets a fresh selection.
+## Rewards, drops and XP
 
-Default timing:
+Completion rewards are separate from enemy drops. Gear chance is one roll per eligible player at completion, not per kill. **100%** guarantees that roll; it does not mean 100 items.
 
-| Timer | Default |
-| --- | --- |
-| Dropped-item pickup grace | 30 seconds |
-| Automatic wrath cleanup warning | 120 seconds |
-| Full wrath encounter, including warning | 10 minutes |
-| Placed-bin trial, with immediate enemies | 10 minutes |
-| Minimum time between judgments, measured from the start | 5 minutes |
-| Stamina blessing | 3 minutes |
-| Ordinary wrath meter visibility | 8 seconds after a change |
-| Litter rescue | First replacement after 1 minute without a pickup; one per minute afterward |
+Enemy and boss drop settings control their own loot chances and ordinary drop quantities. Epic Loot follows the creature's drop permission and chance, but equipment is not duplicated by the ordinary quantity multiplier. Keep **Use separate boss loot settings** enabled to tune bosses independently.
 
-Encounter cooldown controls Next judgment and applies to existing waits when an admin changes it. An active event must finish before another begins. Next judgment and active-event countdowns stay visible even when the ordinary wrath meter fades.
+For land modes, completion rewards follow **each player's own progress** by default, including World Advancement Progression private keys. Starter, highest participating player and world progression are alternatives. These choices do not change a bin's enemies.
 
-Move hard-to-reach litter replaces an uncollected ground pile closer to the bin after nobody finds litter for a while. Time without finding litter defaults to 60 seconds. Every successful pickup by any player restarts this shared wait. Afterward, another pile is replaced each minute until pickups resume. It preserves the required total, skips carried and returned litter, and does not run at sea. Both timers are configurable.
+For Ocean, **Use private progression when available** is on by default. Each recipient gets the tier allowed by their WAP private boss keys. If WAP is absent or private progression is disabled, actual global world boss keys set the tier. An empty private list remains at the starting tier. Turn this option off to always use global progression. Materials, extra supplies, coins and equipment use this tier; serpent death drops remain separate and follow the enemy drop controls and Epic Loot's own rules.
 
-The admin-only Reset all timers button clears judgment, reward and bin cooldowns for everyone, including players who join later. It keeps current events, their countdowns and wrath intact. The reset is saved per world in the server config folder.
+Ocean's **Progression** reward categories include land-biome material and equipment tables. These are reward tiers: defeating Eikthyr unlocks Black Forest pools, for example. Sea materials remain in the Ocean bundle. Land enemy lists and litter settings do not appear in either Ocean mode.
 
-## Enemy waves and placement
+**Mod rewards** discovers supplies from recipes for Epic Loot's loaded biome equipment, including compatible Therzie gear. **Mod material choices** uses `Auto` by default, or accepts custom item tables. Ocean adds progression supplies. Missing items are skipped; an unavailable supply table uses vanilla items. Excluded equipment and Epic Loot's deny list still apply.
 
-Single wave preserves the original difficulty. Fixed waves requires the configured number; Until cleanup keeps spawning while litter remains, then requires the surviving enemies to be defeated. Ocean has no litter, so Until cleanup uses the fixed wave count there. Survive timer keeps the event running until its timer ends; mission litter must still be returned to win. All modes share the same event timer, music and weather. Waves do not extend the event.
+Wacky MMO enemy and boss XP have separate **0–500%** settings in each mode and bin override. `1` is 1%, `100` is normal XP, and `500` is five times normal. The default is about one third. Group shares use the same event rate once.
 
-Time between waves and Rest after a cleared wave both apply. Turn off Clear enemies before next wave to allow overlap. Maximum enemies alive prevents overcrowding, and Total enemy limit caps the whole encounter. Individual waves still respect the existing land or Ocean enemy limit. The configurable caps are 100 living enemies and 1,000 enemies in total; defaults remain much lower. If a fixed wave count cannot fit before the event deadline, lower the count or increase the event time.
+## Cleanup and participation
 
-Biome enemies accepts `Greydwarf 70 8, Greydwarf_Elite 20 2, Greydwarf_Shaman 10 1`: name, relative weight, maximum per wave. A name alone has weight 1. Empty uses the automatic biome pool. Missing or unsuitable mod creatures are skipped; if none of a custom list remain available, automatic biome enemies are used. Bosses use their own biome lists. Enable wave bosses and choose the first wave, frequency, chance and health multiplier. A boss replaces one normal wave slot and counts toward the limits. Event boss copies do not unlock vanilla boss progression. Choose swimming creatures for Ocean lists.
+Wrath gives two minutes to clean up by default. Trial timing is separate. Adjust litter count, size, glow, inner/outer radius, spacing, terrain and plant checks. Mission litter stacks to 50 before stack-size mods.
 
-Admin and server has separate personal base and ward overrides. These are off by default. Public base trials are enabled by default for new admin-placed bins, including normal Infinity Hammer placement. The server verifies the admin and saves approval for that exact bin and world, so anyone can use it while the admin is offline. Normal players cannot approve bins or place their own bins inside bases. Ward protection and physical clearance still apply.
+Late helpers add litter only while required piles remain unfound. Each player increases the target at most once; rejoining does not add more. The total remains capped at 100. Replacement piles help when pickups stop, using the configured delay and placement rules. The counter includes litter carried by other participants.
 
-For an older bin, stand within 8 metres and open Litter Bin > Individual bin settings. Use Approve public base trials or Revoke public base trials. The same panel sets its event radius and litter search distances. Zero uses global defaults. Resetting the radius keeps its approval. A copied or rebuilt bin has a different identity and needs its own approval. Finish the active event before changing that bin.
+Three returns mean the starting life plus three revives or respawns. A fourth death locks the player out until the event ends. Resurrection uses the same allowance. Reconnecting does not reset it. Graves can be recovered after the event.
 
-Biome creatures comes filled with local enemy and mini-boss examples. Empty old defaults upgrade; custom lists stay intact. Meadows and Ocean use local creature champions, with strength adjustable through Boss health multiplier. Optional mini-bosses remain off until Enable wave bosses is turned on under Enemy waves.
+The dome gives a warning before sealing. Late helpers can enter by default, then must stay. Boat and player participation at sea use horizontal distance, so waves do not push the crew outside the event. Music, weather, object protection and the dome follow the event timer.
 
-Cleanup placement controls the inner and outer litter radius, spacing, even circles, random scatter or clusters. Rock tops are optional and must be wide enough, low enough and within the slope limit. Group litter scaling fixes the objective when the event starts. Optional golden hints appear after a shared period without successful pickups. Replacement piles use the same placement rules. Mission litter clears from loaded inventories when its event ends; saved containers and tombstones are cleaned when loaded.
+**Event rules** controls overlap, outside hostiles, group scaling and what happens when the area is empty: continue, pause or end. Player tames are left alone. Wild enemies return to normal behavior when the event ends. Events save their objectives, waves, phases, return counts and remaining time. Time pauses while the server is offline. Back up `BepInEx/config/Dova.OdinHatesLitter.events` with the world.
 
-The Solo, Group and Survival preset buttons change only the settings listed beside them. They never apply automatically. Preview this biome's enemy choices lists configured creatures without spawning anything.
+## Messages and display
 
-## Modded rewards and updates
+**Event popup** controls the banner or minimal style, position, size, width, duration, colors, opacity and animation. **Display** controls the persistent timer, litter and wave tracker separately.
 
-Include Epic Loot registered gear reads the currently loaded biome pools, including compatible Therzie and other equipment. Custom equipment entries accept relative weights, such as `SwordBronze 2, SwordFlint_TW 1`. Registered equipment weight controls the additional pool. Excluded equipment supports names and `*` wildcards; Epic Loot's denied-item list is also respected. Equipment type balancing and progression limits still apply.
+An admin bin can override **Event messages** for entering, leaving, starting and completing its event. Use `{event}` for the bin's name and `{player}` for the entering/leaving player or event starter. Empty text keeps the usual notices. These messages use the event popup settings and are saved separately for each bin.
 
-Missing items are skipped. If Epic Loot's optional equipment API changes, the equipment bonus is skipped with a single warning and ordinary rewards continue. If CLLC's API changes, event creatures fall back to normal level handling. These fallbacks reduce disruption from mod updates; a breaking Valheim or dependency update can still require a new build. Keep the same Odin Hates Litter build and content mods on the server and clients.
+## Admin tools
+
+Refresh the live event list to see remaining time and participants. Choose a connected player, mode and timer to reset just that cooldown. **Next judgment** applies to Wrath and Ocean Battle. Resetting a cooldown keeps active events and return counts. A bin's own cooldown reset is in its admin panel.
+
+Cancellation requires confirmation and can return the offering when it is still available. Save named presets, copy modes, reset one category, or check configured enemies and loot. Recent event and reward actions appear in history. Detailed logs are in the Server section.
+
+Optional integrations use the installed mod data and fall back when an API is unavailable. Breaking game or dependency updates can still require a new build. Keep the same content mods on the server and clients.
 
 ## Full reference
 
-Defaults below apply to new configs. Existing custom values stay in place.
+Defaults apply to new configs. Existing custom values are kept. Event settings below are available under their relevant mode categories.
 
 ### Admin tools
 
@@ -169,6 +123,7 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Admins can start events inside wards | false | Separate admin override for event placement inside wards. Does not grant access to another player's chest. |
 | Admin-placed bins allow public trials inside bases | true | New bins placed by an admin or host are approved by the server so anyone can start their trials near bases. Approval stays with that bin across restarts. Existing bins can be approved or revoked under Individual bin settings. Ordinary players cannot approve bins or place their own inside bases. Ward access is unchanged. |
 | Protect admin-placed bins | true | Protect admin-placed and admin-approved Litter Bins from damage and accidental removal, even in debug mode. Admins can still use Remove this bin in its settings after emptying it and finishing its event. Normal player bins keep the usual rules. |
+| Allow admins to overlap events | false | Allows an admin starting an event to bypass the overlap check. Ordinary players still follow it. |
 
 
 ### Atmosphere
@@ -270,17 +225,31 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Ocean | Serpent 100 | One optional mini-boss or champion, selected by relative weight. Example: Serpent 100. Empty disables bosses in this biome. Enable wave bosses must be on. Meadows and Ocean use local creature champions; Boss health multiplier adjusts their strength. |
 
 
+### Blessings
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Enable blessing | true | Give eligible contributors Odin's Forgiveness after cleanup or victory. The blessing boosts the regeneration types configured below. Reward cooldowns also apply. |
+| Extra stamina regeneration (%) | 15 | Extra stamina regeneration percentage from Odin's reward. |
+| Extra health regeneration (%) | 0 | Extra health regeneration from Odin's Forgiveness. Zero disables this bonus. Increases normal health regeneration; does not instantly heal or add maximum health. |
+| Extra Eitr regeneration (%) | 0 | Extra Eitr regeneration from Odin's Forgiveness. Zero disables this bonus. Does not grant an Eitr pool to a player without one. |
+| Blessing duration (seconds) | 180 | Duration of Odin's Forgiveness in seconds. All enabled regeneration bonuses last this long. |
+
+
 ### Cleanup
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Scale litter with nearby players | false | Add litter for nearby living players when an event begins. The objective stays fixed after the event starts. |
+| Scale litter with nearby players | false | Add litter for nearby living players when an event begins. Late joiners use the separate Add litter for late helpers setting. |
+| Add litter for late helpers | true | Add litter when a new player joins while required piles remain unfound. Each player counts once per event. Stops once every pile has been found, even if it still needs returning. Uses Litter per extra player and Group litter limit. |
 | Litter per extra player | 2 | Additional piles for each nearby player when litter scaling is enabled. |
 | Group litter limit | 100 | Maximum piles after group scaling. Applies to both bin trials and regular wrath cleanup. |
 | Move replacement piles closer | true | Prefer the inner part of the configured litter area when replacing hard-to-find piles. Off uses the entire search area. |
 | Show hints for missing litter | false | After no successful pickup for a while, show a small pulsing golden marker above uncollected piles. Carried litter is never marked. |
 | Time before litter hints (seconds) | 60 | Every successful pickup by any participant restarts this shared hint timer. |
 | Litter hint visibility (metres) | 35 | How close a player must be to see a missing-pile hint. |
+| Litter glow opacity (%) | 50 | Opacity of the soft gold ring around litter. Zero hides it. Applies to existing litter for everyone. |
+| Litter size (%) | 100 | Size of litter in the world. 100 is normal, 200 is double. Its pickup hitbox scales with it. Applies to existing litter for everyone. |
 | Move hard-to-reach litter | true | When nobody has picked up litter for a while, replace one uncollected ground pile at a time with a new pile near the bin. The required total stays the same. Carried and returned litter is never replaced. |
 | Time without finding litter (seconds) | 60 | Start replacements after this long without a successful litter pickup anywhere in the event. Every player's pickup restarts the wait. Default: one minute. Zero disables replacements. |
 | Time between replacement piles (seconds) | 60 | After the first replacement, add another at this interval while nobody finds litter. Default: one per minute. Each replaces an uncollected pile; the goal does not grow. No replacements at sea. |
@@ -310,10 +279,10 @@ Defaults below apply to new configs. Existing custom values stay in place.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Item amount multiplier | 1 | Scale coins and materials after peaceful cleanup. 1 is normal, 2 is double, and 0 disables these items. Does not change the stamina blessing or equipment chance. |
-| Item reward chance (%) | 100 | Chance for each eligible player to receive the cleanup item bundle. The stamina blessing is separate. |
+| Item amount multiplier | 1 | Scale coins and materials after peaceful cleanup. 1 is normal, 2 is double, and 0 disables these items. Does not change Odin's Forgiveness or equipment chance. |
+| Item reward chance (%) | 100 | Chance for each eligible player to receive the cleanup item bundle. Odin's Forgiveness is separate. |
 | Extra cleanup items | Empty | Extra items in addition to the biome bundle. Example: Honey 2-4 @ 50%. Empty adds nothing. |
-| Give rewards for peaceful cleanup | true | Reward each qualifying helper when all litter is returned before enemies arrive. Uses cleanup items, chance, multiplier and cooldown, plus the stamina blessing. |
+| Give rewards for peaceful cleanup | true | Reward each qualifying helper when all litter is returned before enemies arrive. Uses cleanup items, chance, multiplier and cooldown, plus Odin's Forgiveness. |
 
 
 ### Combat rewards
@@ -330,6 +299,10 @@ Defaults below apply to new configs. Existing custom values stay in place.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
+| Tracker horizontal position (%) | 50 | Horizontal center of the event timer, litter and wave tracker. Vertical position uses Top offset. |
+| Tracker size (%) | 100 | Size of the persistent event tracker and wrath meter. |
+| Tracker width | 650 | Maximum width of the event tracker at 1080p. Long text wraps. |
+| Tracker background opacity (%) | 15 | Soft background behind the event tracker. Zero hides it. |
 | Show encounter progress | true | Show nearby enemies or litter remaining, and whether your contribution qualifies for rewards. You must still finish alive and nearby; reward cooldowns apply. |
 | Show event timer | true | Show the time left in the nearby encounter. Events continue if their starter dies or leaves, until completed or timed out. |
 | Show wrath meter | true | Show the wrath count and cleanup countdown at the top of the screen. Turn off to hide the meter entirely. |
@@ -397,6 +370,9 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Maximum enemies alive | 20 | Upper limit on living enemies per event across all waves. Existing biome encounter limits still control each wave. |
 | Total enemy limit | 300 | Maximum enemies across an entire event. Once reached, no more waves spawn. |
 | Stop new waves with time left (seconds) | 15 | Avoid starting a wave just before the event ends. Single-wave events still get their first wave. |
+| Health increase per wave (%) | 0 | Extra health for later waves, capped by Maximum wave multiplier. |
+| Damage increase per wave (%) | 0 | Extra damage for later waves, capped by Maximum wave multiplier. |
+| Maximum wave multiplier | 3 | Upper limit for gradual wave health and damage increases. Completion rewards are awarded once per event. |
 
 
 ### Epic Loot equipment
@@ -408,12 +384,12 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Include earlier biome equipment | false | Also include registered gear from earlier biome tiers. Off keeps the current tier's equipment. Progression limits still apply. |
 | Enable equipment bonus | true | Chance to award one enchanted weapon or armor piece to each eligible contributor. Requires Epic Loot on the server and clients. |
 | Allow equipment for cleanup | false | Also roll the equipment bonus after peaceful cleanup. Off means combat victories only. |
-| Equipment chance per player (%) | 15 | Separate equipment roll for each player who earns an item bundle. At most one equipment item per reward. |
+| Equipment chance per player (%) | 15 | Chance for one equipment item per eligible player after a land wrath event. Placed-bin trials and Ocean events have their own chances. Does not change enemy drops. |
 | Maximum equipment rarity | Ancient | Highest allowed equipment rarity. Unavailable tiers in an older Epic Loot version are skipped. |
 | Balance equipment types | true | Choose a weapon type or armor slot first, then an item. This keeps large armor lists from crowding out other gear. |
 | Avoid recent equipment repeats | true | Avoid the last three equipment rewards for each player while the server is running, when another choice is available. |
 | Include Epic Loot registered gear | true | Add loaded equipment from Epic Loot's biome item lists, including compatible modded gear. Your custom equipment choices are still included. |
-| Match equipment to player progress | true | Cap equipment by bosses the recipient has defeated, and by the world's progress. Ocean equipment uses this progression tier. |
+| Match equipment to player progress | true | Cap land equipment to the Progression source in Rewards. Ocean always uses that source to choose its equipment tier. Does not change enemy drops. |
 
 
 ### Epic Loot materials
@@ -435,30 +411,58 @@ Defaults below apply to new configs. Existing custom values stay in place.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Meadows | Club, AxeStone, AxeFlint, SpearFlint, KnifeFlint, Bow, ShieldWood, ShieldWoodTower, HelmetLeather, ArmorLeatherChest, ArmorLeatherLegs, CapeDeerHide | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
-| Black Forest | SwordBronze, AxeBronze, MaceBronze, SpearBronze, AtgeirBronze, KnifeCopper, BowFineWood, ShieldBronzeBuckler, HelmetBronze, ArmorBronzeChest, ArmorBronzeLegs, HelmetTrollLeather, ArmorTrollLeatherChest, ArmorTrollLeatherLegs, CapeTrollHide | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
-| Swamp | SwordIron, AxeIron, MaceIron, SpearElderbark, AtgeirIron, SledgeIron, Battleaxe, BowHuntsman, ShieldIronBuckler, ShieldBanded, ShieldIronTower, HelmetIron, ArmorIronChest, ArmorIronLegs, HelmetRoot, ArmorRootChest, ArmorRootLegs | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
-| Mountains | SwordSilver, MaceSilver, SpearWolfFang, KnifeSilver, BattleaxeCrystal, BowDraugrFang, ShieldSilver, HelmetDrake, ArmorWolfChest, ArmorWolfLegs, CapeWolf, HelmetFenring, ArmorFenringChest, ArmorFenringLegs, FistFenringClaw | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
-| Plains | SwordBlackmetal, AxeBlackMetal, KnifeBlackMetal, AtgeirBlackmetal, MaceNeedle, BowDraugrFang, ShieldBlackmetal, ShieldBlackmetalTower, HelmetPadded, ArmorPaddedCuirass, ArmorPaddedGreaves, CapeLox, CapeLinen | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
-| Mistlands | SwordMistwalker, THSwordKrom, SpearCarapace, AtgeirHimminAfl, SledgeDemolisher, KnifeSkollAndHati, BowSpineSnap, CrossbowArbalest, StaffFireball, StaffIceShards, StaffShield, StaffSkeleton, ShieldCarapace, ShieldCarapaceBuckler, HelmetCarapace, ArmorCarapaceChest, ArmorCarapaceLegs, HelmetMage, ArmorMageChest, ArmorMageLegs, CapeFeather | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
-| Ashlands | SwordNiedhogg, THSwordSlayer, SpearSplitner, MaceEldner, AxeBerzerkr, BowAshlands, CrossbowRipper, StaffClusterbomb, StaffLightning, StaffGreenRoots, StaffRedTroll, ShieldFlametal, ShieldFlametalTower, HelmetFlametal, ArmorFlametalChest, ArmorFlametalLegs, HelmetAshlandsMediumHood, ArmorAshlandsMediumChest, ArmorAshlandsMediumLegs, HelmetMage_Ashlands, ArmorMageChest_Ashlands, ArmorMageLegs_Ashlands, CapeAsh, CapeAsksvin | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
-| Deep North | SwordGold, THSwordGold, SwordGold_FrostFire, THSwordGold_FrostFire, SwordGold_BloodLightning, THSwordGold_BloodLightning, ArmorDeepNorthMageChest, ArmorDeepNorthMagelegs | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
-| Ocean | Empty | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses player progress. |
+| Meadows | Club, AxeStone, AxeFlint, SpearFlint, KnifeFlint, Bow, ShieldWood, ShieldWoodTower, HelmetLeather, ArmorLeatherChest, ArmorLeatherLegs, CapeDeerHide | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
+| Black Forest | SwordBronze, AxeBronze, MaceBronze, SpearBronze, AtgeirBronze, KnifeCopper, BowFineWood, ShieldBronzeBuckler, HelmetBronze, ArmorBronzeChest, ArmorBronzeLegs, HelmetTrollLeather, ArmorTrollLeatherChest, ArmorTrollLeatherLegs, CapeTrollHide | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
+| Swamp | SwordIron, AxeIron, MaceIron, SpearElderbark, AtgeirIron, SledgeIron, Battleaxe, BowHuntsman, ShieldIronBuckler, ShieldBanded, ShieldIronTower, HelmetIron, ArmorIronChest, ArmorIronLegs, HelmetRoot, ArmorRootChest, ArmorRootLegs | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
+| Mountains | SwordSilver, MaceSilver, SpearWolfFang, KnifeSilver, BattleaxeCrystal, BowDraugrFang, ShieldSilver, HelmetDrake, ArmorWolfChest, ArmorWolfLegs, CapeWolf, HelmetFenring, ArmorFenringChest, ArmorFenringLegs, FistFenringClaw | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
+| Plains | SwordBlackmetal, AxeBlackMetal, KnifeBlackMetal, AtgeirBlackmetal, MaceNeedle, BowDraugrFang, ShieldBlackmetal, ShieldBlackmetalTower, HelmetPadded, ArmorPaddedCuirass, ArmorPaddedGreaves, CapeLox, CapeLinen | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
+| Mistlands | SwordMistwalker, THSwordKrom, SpearCarapace, AtgeirHimminAfl, SledgeDemolisher, KnifeSkollAndHati, BowSpineSnap, CrossbowArbalest, StaffFireball, StaffIceShards, StaffShield, StaffSkeleton, ShieldCarapace, ShieldCarapaceBuckler, HelmetCarapace, ArmorCarapaceChest, ArmorCarapaceLegs, HelmetMage, ArmorMageChest, ArmorMageLegs, CapeFeather | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
+| Ashlands | SwordNiedhogg, THSwordSlayer, SpearSplitner, MaceEldner, AxeBerzerkr, BowAshlands, CrossbowRipper, StaffClusterbomb, StaffLightning, StaffGreenRoots, StaffRedTroll, ShieldFlametal, ShieldFlametalTower, HelmetFlametal, ArmorFlametalChest, ArmorFlametalLegs, HelmetAshlandsMediumHood, ArmorAshlandsMediumChest, ArmorAshlandsMediumLegs, HelmetMage_Ashlands, ArmorMageChest_Ashlands, ArmorMageLegs_Ashlands, CapeAsh, CapeAsksvin | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
+| Deep North | SwordGold, THSwordGold, SwordGold_FrostFire, THSwordGold_FrostFire, SwordGold_BloodLightning, THSwordGold_BloodLightning, ArmorDeepNorthMageChest, ArmorDeepNorthMagelegs | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
+| Ocean | Empty | Equipment prefab names, separated by commas. Loaded Epic Loot gear can also join the pool. Empty Ocean uses the progression source selected in Rewards. |
 
 
 ### Equipment rarities
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Meadows | Magic 95, Rare 5 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
-| Black Forest | Magic 70, Rare 30 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
-| Swamp | Rare 80, Epic 20 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
-| Mountains | Rare 50, Epic 45, Legendary 5 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
-| Plains | Epic 80, Legendary 20 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
-| Mistlands | Epic 50, Legendary 45, Mythic 5 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
-| Ashlands | Legendary 70, Mythic 29, Ancient 1 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
-| Deep North | Legendary 30, Mythic 65, Ancient 5 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
-| Ocean | Empty | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses player progress. |
+| Meadows | Magic 95, Rare 5 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+| Black Forest | Magic 70, Rare 30 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+| Swamp | Rare 80, Epic 20 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+| Mountains | Rare 50, Epic 45, Legendary 5 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+| Plains | Epic 80, Legendary 20 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+| Mistlands | Epic 50, Legendary 45, Mythic 5 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+| Ashlands | Legendary 70, Mythic 29, Ancient 1 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+| Deep North | Legendary 30, Mythic 65, Ancient 5 | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+| Ocean | Empty | Rarity names with weights, such as Legendary 70, Mythic 29, Ancient 1. Names alone have equal odds. Empty Ocean uses the progression source selected in Rewards. |
+
+
+### Event creature loot
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Meadows boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Black Forest boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Swamp boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Mountains boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Plains boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Mistlands boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Ashlands boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Deep North boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Ocean boss loot chance (%) | 100 | Chance for each event boss to drop ordinary and Epic Loot items. Requires separate boss loot settings and Allow boss drops. Completion rewards are unchanged. |
+| Use separate boss loot settings | false | On lets event bosses use their own loot switch and biome chances. Off keeps the existing enemy loot switch and biome chances for all event creatures. |
+| Allow boss drops | true | Allow ordinary and Epic Loot drops from event bosses when separate boss loot settings are on. Completion rewards are separate. |
+| Enemy drop amount multiplier | 1 | Multiplies ordinary creature drop quantities for event enemies, after other mods. Fractional amounts use a stable roll. Does not duplicate Epic Loot equipment or change completion rewards; use the biome chances to control Epic Loot drops. |
+| Boss drop amount multiplier | 1 | Multiplies ordinary creature drop quantities for event bosses. Independent of normal event enemies. Epic Loot equipment and completion rewards are unchanged. |
+
+
+### Event creatures
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Enemy health multiplier | 1 | Health of ordinary event enemies after their level is applied. Wild creatures are unchanged. Boss health uses the existing mini-boss and single-boss settings. Applies to new spawns. |
+| Enemy damage multiplier | 1 | Damage dealt by ordinary event enemies. One keeps their usual damage, including other mods. Changes apply during combat. |
+| Boss damage multiplier | 1 | Damage dealt by event mini-bosses and single bosses. Does not change ordinary enemies or world bosses. |
 
 
 ### Event dome
@@ -474,6 +478,46 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Show the wall when touched | true | Briefly show a golden ripple where a player or their boat touches the invisible wall. |
 | Show dome messages | true | Explain when the dome seals, when a helper joins, why a crossing is blocked, and when players are free to leave. Repeated wall messages are limited. |
 | Admins can cross the dome | false | Let admins and solo hosts cross the dome for maintenance. Off makes them follow the same boundary rules as players. This does not restore returns or grant rewards. |
+
+
+### Event messages
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Entering the area | Empty | Custom notice for this mode or admin bin. Use {event} and {player}. Empty keeps the usual notices. Up to 256 characters are shown. |
+| Leaving the area | Empty | Custom notice for this mode or admin bin. Use {event} and {player}. Empty keeps the usual notices. Up to 256 characters are shown. |
+| Event started | Empty | Custom notice for this mode or admin bin. Use {event} and {player}. Empty keeps the usual notices. Up to 256 characters are shown. |
+| Event completed | Empty | Custom notice for this mode or admin bin. Use {event} and {player}. Empty keeps the usual notices. Up to 256 characters are shown. |
+
+
+### Event popup
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Show styled notices | true | Use a framed, fading notice for Odin's dialogue and event messages. Off uses the game's message style. |
+| Style | Banner | Banner has a subtle frame. Minimal shows only the title and text. |
+| Title | ODIN'S JUDGMENT | Heading above event notices. Leave empty for no heading. |
+| Notice duration (seconds) | 7 | How long each notice stays visible. Includes its short fade in and out. |
+| Horizontal position (%) | 50 | Center of the notice: 0 left, 50 center, 100 right. Kept inside the screen. |
+| Vertical position (%) | 32 | Center of the notice: 0 top, 50 middle, 100 bottom. Separate from the persistent tracker. |
+| Size (%) | 100 | Overall notice size, including text and spacing. Adapts to screen resolution. |
+| Width | 620 | Width at 1080p. Longer messages wrap inside the screen. |
+| Text size | 20 | Message text size at 1080p, before the size multiplier. |
+| Background opacity (%) | 45 | Banner background opacity. Zero leaves only the frame and text. |
+| Animate notices | true | Add a short, gentle slide during the fade. |
+| Accent color | #FFC961 | Title and frame color, as #RRGGBB or #RRGGBBAA. |
+| Text color | #FFF2D1 | Message color, as #RRGGBB or #RRGGBBAA. |
+| Background color | #10151A | Banner color, as #RRGGBB or #RRGGBBAA. Opacity has a separate setting. |
+
+
+### Event rules
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Keep wild enemies outside | true | Stops outside hostile creatures from entering or fighting across the event boundary. Tamed creatures and wildlife are unchanged. Existing hostiles inside may leave. |
+| When nobody is in the area | Continue | Continue keeps the clock running. Pause freezes event timers after the empty-area delay. End closes without rewards. Death alone does not end an event. |
+| Empty-area delay (seconds) | 60 | Time without a living participant before the empty-area rule applies. |
+| Enemy group scaling | Future waves | Players at start fixes group difficulty for the event. Future waves uses nearby players at each new wave; living creatures never change health when someone joins. |
 
 
 ### Forgiveness
@@ -515,16 +559,16 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Accepted offering items | Wood, Stone, Resin, BeechSeeds, FirCone, GreydwarfEye | Comma-separated prefab names that can pay for a trial. Only plain items are consumed. All other items stay in the bin. |
 | Items needed for a trial | 20 | Total accepted items consumed from the bin when the server approves a trial. Item types can be mixed. |
 | Litter piles to clean | 6 | Piles spread in a full circle around the bin on open ground, from 1 to 100. Pick them up and return the litter. Base stack size is 50; stack-size mods can increase it. Mission litter never adds wrath. |
-| Trial cooldown (seconds) | 900 | Wait between trials for the bin and the player. Both cooldowns survive server restarts and pause while offline. Normal reward cooldowns also apply. |
+| Trial cooldown (seconds) | 900 | Wait before the same bin can run another event. Admin-placed and admin-approved bins have independent cooldowns: finishing one lets you start another ready bin. Ordinary player bins also apply a personal trial cooldown. Cooldowns survive restarts and pause while offline. Reward cooldowns are separate. |
 | Trial time limit (seconds) | 600 | Time to return every litter pile and defeat the wave. Music, weather and the visible countdown follow this timer. The trial continues if its starter dies or leaves. |
-| Individual bin settings | Empty | Admins can open a placed bin for its own settings panel, or use these nearby-bin controls. Set event radius, litter distances and public base access, preview the boundary, or confirm removal of an empty bin. Zero uses server defaults. Finish its event before editing or removing it. |
+| Individual bin settings | Empty | Admins can open a placed bin for its Area, Event, Creatures and Access tabs. Set event radius, litter distances and public base access, preview the boundary, or confirm removal of an empty bin. Zero uses server defaults. Finish its event before editing or removing it. |
 
 
 ### Litter Bin rewards
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Item amount multiplier | 1 | Extra multiplier for coins and materials after a paid bin trial, applied after the combat multiplier. 1 is normal and 2 is double. Does not change the stamina blessing or equipment chance. |
+| Item amount multiplier | 1 | Extra multiplier for coins and materials after a paid bin trial, applied after the combat multiplier. 1 is normal and 2 is double. Does not change Odin's Forgiveness or equipment chance. |
 | Equipment chance per player (%) | 40 | Chance for an enchanted equipment reward after a completed cleanup trial. Requires Epic Loot and an eligible item reward. |
 
 
@@ -539,13 +583,38 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Fury lines | More rubbish, while I stand before you? Very well. Let the wilds settle this. \| You have spent the last of my patience. Ready your weapon. | Lines when more litter angers Odin during his warning. Separate lines with \|. Empty uses the default lines. |
 | Show Odin dialogue | true | Show Odin's arrival, fury, warning and victory lines. Does not hide the countdown or change encounter rules. |
 | Show ordinary comments | true | Allow random remarks about litter. Wrath notices and Odin encounter dialogue have their own switches. |
-| Show received item rewards | true | Show the items you actually receive and the stamina blessing. Reward cooldown messages also use this setting. |
+| Show received item rewards | true | Show the items you actually receive and Odin's Forgiveness. Reward cooldown messages also use this setting. |
 | Time between pickup reminders (seconds) | 10 | Minimum time between drop reminders. Zero allows a reminder for every drop. |
 | Time between ordinary comments (seconds) | 30 | Minimum time between ordinary litter comments. Final warnings and fury dialogue are not delayed. |
 | Show notices in the center | true | Show Odin's dialogue in the center as well as above his apparition. |
 | Chance of an Odin comment (%) | 25 | Chance of an ordinary roast when a drop's grace period expires. |
 | Show wrath notices | true | Show a notice whenever abandoned drops increase wrath. Separate from the random comment chance and the meter. |
 | Show drop reminders | true | Show the pickup window or explain why an item, base or ward is exempt. Use Time between pickup reminders to control how often these appear. |
+
+
+### Mod material choices
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Meadows | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+| Black Forest | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+| Swamp | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+| Mountain | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+| Plains | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+| Mistlands | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+| Ash Lands | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+| Deep North | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+| Ocean | Auto | Auto uses loaded biome equipment recipes. Or use ItemName 2-4. An unavailable list falls back to vanilla supplies. Ocean also follows player progression. |
+
+
+### Mod rewards
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Use loaded mod materials | true | Build supply choices from recipes for Epic Loot's biome equipment, including installed mod gear. Missing integrations use vanilla supplies. Progression limits still apply. |
+| Supply types per reward | 2 | Different materials chosen for each player's completion reward. Supplies are rolled once when the event succeeds. |
+| Minimum supply amount | 2 | Minimum amount of each automatically chosen supply, before the normal reward multiplier. |
+| Maximum supply amount | 5 | Maximum amount of each automatically chosen supply, before the normal reward multiplier. |
 
 
 ### Ocean
@@ -559,7 +628,32 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Serpents per extra player | 1 | Extra serpents for nearby players when group scaling is enabled. |
 | Serpent limit | 3 | Maximum serpents, including group scaling and fury. |
 | Encounter radius (metres) | 140 | Room to sail during an Ocean encounter. Leaving stops your local music and weather; the event keeps running until completed or timed out. |
-| Keep sea rewards safe | true | At sea, put rewards in the player's inventory when there is room. Overflow floats on the water. Litter dropped from a boat also floats so it can be recovered. |
+| Keep sea rewards safe | true | At sea, put rewards in the player's inventory when there is room. Overflow and loot from Ocean event enemies float, including serpent scales and Epic Loot drops. Items dropped from a boat also float. |
+
+
+### Ocean rewards
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Use private progression when available | true | Ocean completion rewards use each recipient's World Advancement Progression private boss keys when enabled. Without private progression, use actual global world boss keys. Off always uses global keys. An empty private key list stays at the starting tier; another player's progress never raises it. |
+| Equipment chance per player (%) | 60 | Chance for one Epic Loot equipment reward after completing an Ocean event. Replaces the land equipment chance. Still requires item rewards and equipment rewards to be enabled. Enemy drops are separate. |
+| Minimum equipment rarity | Rare | Raise successful Ocean equipment rolls to at least this rarity, within the global maximum and rarities supported by Epic Loot. Does not change enemy drops. |
+| Progression supplies (%) | 50 | Extra materials from the progression biome, alongside Ocean materials. 50 gives half that biome's base bundle; 0 disables the bonus. Includes enchanting materials when enabled. Combat and bin reward multipliers still apply. |
+
+
+### Ocean waves
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Wave mode | Single wave | Sea battles use their own waves: defeat one wave, a fixed number of waves, or survive until the event timer ends. Land wave settings do not apply. |
+| Number of waves | 3 | Waves to defeat in Ocean Fixed waves mode. Does not change land events. |
+| Time between waves (seconds) | 60 | Minimum time between sea waves. Uses the existing Ocean serpent count and group scaling for each wave. |
+| Rest after clearing a wave (seconds) | 15 | Break after the last serpent in a wave dies, before the next wave can arrive. |
+| Wait for the current wave to die | true | On prevents overlapping sea waves. Off allows new waves while serpents remain, up to the alive limit. |
+| Extra enemies each wave | 0 | Additional sea enemies per later wave. Zero keeps each wave at the normal Ocean group-scaled count. Ocean serpent limits still apply. |
+| Maximum living enemies | 6 | Maximum living event enemies in one sea battle. Does not change land limits. |
+| Maximum enemies per event | 100 | Total sea enemies across all waves. Survive timer still lasts until the timer ends when this cap is reached. |
+| Stop new waves near the end (seconds) | 15 | Do not start another sea wave with less than this much event time remaining. |
 
 
 ### Participation
@@ -570,6 +664,27 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Returns allowed per event | 3 | Three allows the starting life and three returns. The fourth death ends participation. Zero locks a player out on their first death. Leaving or reconnecting does not restore returns. Each new event starts fresh. |
 | Damage needed for rewards | 20 | Total damage to judgment enemies needed to qualify. Alternatively, return the required number of mission litter piles. |
 | Litter stacks needed for rewards | 1 | Cleaned piles needed to qualify instead of dealing damage. When Return litter to the bin is on, a pile counts only after depositing it. Each pile counts once. |
+
+
+### Raid boss
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Boss stars | -1 | -1 uses normal CLLC/repeat-offender levels. 0 is no stars. Positive values force this many stars before health multipliers. |
+| CLLC creature effect | Automatic | For raid bosses made from ordinary creatures. Splitting is excluded to keep event ownership and counts reliable. |
+| CLLC infusion | Automatic | Applies a loaded CLLC infusion. Automatic keeps CLLC's roll; None removes it. CLLC must enable infusions. |
+| CLLC boss affix | Automatic | For true boss creatures. Clone/summoner affixes are excluded; use the tracked reinforcement settings for adds. CLLC must enable boss affixes. |
+
+
+### Raid reinforcements
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Boss calls reinforcements | false | Summon helpers while the raid boss is alive. Remaining helpers disappear when the boss is defeated. No extra completion reward per reinforcement wave. |
+| Enemy choices | Empty | Weighted enemy names for boss helpers, for example Greydwarf:3:8, Greydwarf_Shaman:1:2. Empty uses this mode's biome enemies. Missing choices fall back to biome enemies. |
+| Enemies per reinforcement wave | 2 | Number of helpers the boss calls each time, limited by Maximum living reinforcements and the event total enemy limit. |
+| Maximum living reinforcements | 8 | Maximum simultaneous helpers, separate from the raid boss. |
+| Time between reinforcements (seconds) | 45 | First helpers arrive this long after the boss. Further waves use the same interval. |
 
 
 ### Repeat offenders
@@ -587,22 +702,39 @@ Defaults below apply to new configs. Existing custom values stay in place.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Give biome materials | true | Give each contributor biome materials in addition to the main item reward and stamina blessing. |
+| Give biome materials | true | Give each contributor biome materials in addition to the main item reward and Odin's Forgiveness. |
 | Give Epic Loot materials | true | Add biome-based Epic Loot enchanting materials to each eligible player's rewards. Epic Loot is required; this setting controls its material rewards. |
 | Extra coins per biome tier | 20 | Extra Coins for each biome tier after Meadows. Tiers run Meadows, Black Forest, Swamp, Mountains, Plains, Mistlands, Ashlands, Deep North. Only applies when the main reward is Coins and its base amount is above zero. |
-| Wacky MMO experience from event enemies (%) | 33.333333 | Share of normal Wacky MMO kill experience, including group shares. The default is one third. Zero disables this experience; 100 keeps the normal rate. Wild enemies, crafting and other experience are unchanged. Wacky MMO is optional. |
+| Wacky MMO experience from event enemies (%) | 33.333333 | Wacky MMO kill XP for ordinary event enemies and reinforcements, including group shares. Default is one third; 0 disables it, 100 is normal and 500 is five times normal. Wild enemies and crafting are unchanged. |
+| Wacky MMO experience from event bosses (%) | 33.333333 | Separate kill XP for event mini-bosses and raid bosses. Default is one third; 0 disables it, 100 is normal and 500 is five times normal. Each mode and admin bin can use its own value. |
+| Progression source | Each player | Whose boss keys set completion reward tiers. Each player uses their own keys. Group choices use eligible contributors still in the event area when it ends. Event starter keeps their last known tier if offline. Reads World Advancement Progression private keys when enabled; world mode uses actual global keys. Does not change enemies. |
+| Limit materials to progression | true | Cap land material and coin rewards to the chosen progression tier. Off uses the event biome directly. Ocean supplies always follow progression. Equipment keeps its separate progression limit. |
 | Cleanup reward cooldown (seconds) | 0 | Extra wait between cleanup rewards. Zero gives rewards for each completed cleanup. Event cooldowns still apply. Combat has its own reward cooldown. |
 | Reward players who help | true | Reward players who successfully pick up encounter litter or damage judgment enemies when the encounter is resolved. |
 | Give rewards after combat | true | Reward contributors after all judgment enemies are defeated. |
-| Enable item rewards | true | Give configured item rewards alongside the optional stamina blessing. Items appear at the recipient's feet. |
+| Enable item rewards | true | Give configured item rewards alongside optional Odin's Forgiveness. Items appear at the recipient's feet. |
 | Main reward item (prefab name) | Coins | Guaranteed item for each contributor, in addition to biome materials. Use a prefab name, such as Coins. The biome coin bonus applies only when this is Coins. |
 | Main reward amount per player | 60 | Base main-item amount for each contributor. Biome coins and the combat multiplier can increase it. Zero disables the main item and its biome coin bonus; materials and blessing can still be earned. |
+
+
+### Sea Offering
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Enable Sea Offerings | true | Craft and use a Sea Offering to start an Ocean Endless Raid. Does not change ordinary Ocean judgments. |
+| Only admins can use offerings | false | On restricts starting Ocean Endless Raids to hosts and server admins. Everyone can still join an active event. |
+| Crafting materials | Coins 20, Resin 10, Chitin 5 | Workbench recipe for one Sea Offering. Use exact item prefabs and whole amounts, separated by commas. Up to eight materials. Example: Coins 20, Resin 10. Missing or invalid materials disable crafting until corrected. Syncs automatically. |
+| Event duration (seconds) | 600 | Total Ocean Endless Raid time, including the arrival warning. Music, weather and the event boundary follow this timer. Waves use this raid's own Ocean wave settings. |
+| Arrival warning (seconds) | 30 | Time to prepare before sea enemies arrive. Limited to half the event duration so the fight has time to begin. |
+| Player cooldown (seconds) | 900 | Wait between starting Ocean Endless Raids. Separate from wrath and regular Ocean judgments. Admin timer resets can clear it; active events continue. |
 
 
 ### Server
 
 | Setting | Default | What it does |
 | --- | --- | --- |
+| Maximum simultaneous events | 8 | Server-wide event limit. New events wait until a slot is available. |
+| Prevent overlapping event areas | true | Keep event circles apart so their domes and objectives do not conflict. |
 | Write detailed logs | false | Log tracked world drops and encounter decisions. |
 
 
@@ -612,15 +744,6 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | --- | --- | --- |
 | Spawn a single boss instead of waves | false | Replace enemy waves with exactly one creature from this biome's single-boss list. Ignores group enemy counts, repeating waves and wave mini-boss chances. Land events still have their cleanup objective. Applies to new events. |
 | Single boss health multiplier | 3 | Health multiplier for the single boss, after its level is applied. Separate from the wave mini-boss multiplier. Summoned bosses do not unlock world progression. |
-
-
-### Stamina blessing
-
-| Setting | Default | What it does |
-| --- | --- | --- |
-| Enable stamina blessing | true | Give each eligible contributor extra stamina regeneration after cleanup or victory. The reward cooldown also applies to this blessing. |
-| Extra stamina regeneration (%) | 15 | Extra stamina regeneration percentage from Odin's reward. |
-| Blessing duration (seconds) | 180 | Duration of the stamina reward in seconds. |
 
 
 ### Wave bosses
@@ -642,4 +765,3 @@ Defaults below apply to new configs. Existing custom values stay in place.
 | Track wrath | true | Enable wrath tracking and encounters. |
 | Wrath required for a visit | 100 | Odin can visit when wrath reaches this amount. Each abandoned stack adds the configured wrath per dropped stack. |
 | Wrath per dropped stack | 1 | Wrath per abandoned world stack, regardless of stack size. Retrieval reverses that stack's contribution. |
-

@@ -1,8 +1,8 @@
 {
   "name": "OdinHatesLitter",
-  "version_number": "1.5.1",
+  "version_number": "1.5.3",
   "website_url": "https://github.com/VariantCreator/OdinHatesLitter",
-  "description": "Face Odin's cleanup trials, biome waves or a single boss inside an event dome. Personal Epic Loot rewards, configurable returns and automatic server sync.",
+  "description": "Leave litter and face Odin's wrath. Clean up, fight waves or start a boss raid with friends. Includes sea battles and personal rewards.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2350",
     "ValheimModding-Jotunn-2.30.1",

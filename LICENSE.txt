@@ -11,5 +11,5 @@ This notice does not restrict rights granted by applicable law or GitHub's Terms
 of Service, including viewing and forking a public repository on GitHub.
 
 Third-party components retain their own licenses. ServerSync is covered by
-lib/ServerSync-LICENSE.txt in the source and ServerSync-LICENSE.txt beside the
-plugin in official releases.
+lib/ServerSync-LICENSE.txt in the source and THIRD_PARTY_NOTICES.txt in official
+releases.
