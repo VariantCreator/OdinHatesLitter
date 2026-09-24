@@ -1,3 +1,11 @@
+# 1.5.4
+
+- Added Monstrum supplies to biome and Ocean rewards, with an option for regular creature trophies.
+- Monstrum event enemies can use vanilla Epic Loot tables when no custom table exists.
+- Svalt in an Odin event no longer opens or closes dungeon doors.
+- Automatic Ocean enemy selection now supports Monstrum sharks.
+- New settings sync from the server and can be changed for each event mode or admin bin.
+
 # 1.5.3
 
 - Craft a Sea Offering to start an Ocean Endless Raid. Its recipe, waves, rewards and cooldown are adjustable.

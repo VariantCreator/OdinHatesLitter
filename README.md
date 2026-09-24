@@ -8,6 +8,8 @@ Build a **Litter Bin** under **Hammer > Misc**, add its offering, then press **A
 
 Events last ten minutes by default. A dome keeps participants inside, with three returns after death. Sea loot stays afloat, and event progress resumes after a restart.
 
+**Monstrum is optional.** Its creature materials join the reward pools, including sea supplies. Admins can add its enemies and bosses to events by prefab name. Existing enemy lists stay as they are.
+
 ## Install
 
 Download [OdinHatesLitter.zip](https://github.com/VariantCreator/OdinHatesLitter/releases/latest).

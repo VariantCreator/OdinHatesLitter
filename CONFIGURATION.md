@@ -57,6 +57,29 @@ Admin bins have their own event cooldowns. A finished event does not block anoth
 
 Regular players' bins always use their local biome. An admin may change an approved bin's enemy and completion-reward biome. Progression still limits rewards, not the selected enemies.
 
+## Monstrum
+
+Monstrum is optional. Install it and its dependencies on the server and every client if you want to use its content.
+
+Under **Modded supplies**, **Include Monstrum supplies** adds materials from its loaded creature drops to automatic completion rewards. It uses the existing supply count and amounts. **Include Monstrum trophies** is off by default and adds regular creature trophies when enabled. Boss trophies and unique boss weapons stay in their normal drop tables. Custom supply lists replace the automatic selection.
+
+Ocean rewards include sea drops, such as shark fins, alongside supplies for each player's progression. Missing creatures or items are skipped. Servers without Monstrum keep their vanilla fallback rewards.
+
+Under **Enemy drops**, **Monstrum Epic Loot fallback** lets event creatures use a similar vanilla creature's loot table when no Monstrum table exists. A pack's existing tables take priority. Normal drop permissions, biome chances, boss settings and CLLC still apply. Wild creatures are unchanged.
+
+Enemy lists are kept on upgrade. Add creatures by prefab name to include them in a mode or bin. These are examples, not automatic replacements:
+
+| Biome | Example enemy list | Example boss |
+| --- | --- | --- |
+| Meadows | `Greyling 80, Fox_TW 20` | `BossAsmodeus_TW` |
+| Black Forest | `Greydwarf 80, Razorback_TW 20` | `BossSvalt_TW` |
+| Swamp | `Draugr 70, Crawler_TW 20, RottingElk_TW 10` | `BossVrykolathas_TW` |
+| Mountains | `Wolf 70, GrizzlyBear_TW 20, ObsidianGolem_TW 10` | `ObsidianGolem_TW` |
+| Plains | `Goblin 80, Prowler_TW 20` | `Prowler_TW` |
+| Ocean | `Serpent 70, Shark_TW 30` | `Shark_TW` |
+
+Weights are relative chances. Empty enemy lists use automatic biome selection; Ocean can then choose loaded sharks as well as serpents. Svalt spawned for an Odin event leaves dungeon doors alone. These settings sync automatically and only admins or hosts can change them.
+
 ## Boss phases and adds
 
 Choose **Boss raid**, save a boss prefab, then enable **Use this bin's raid phases** in the detailed editor. Use the arrows to edit up to six phases. The first phase sets starting attributes. Later phases trigger once when the boss reaches the configured health percentage **or** the current phase reaches its time trigger. Zero disables a trigger.
@@ -454,6 +477,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Allow boss drops | true | Allow ordinary and Epic Loot drops from event bosses when separate boss loot settings are on. Completion rewards are separate. |
 | Enemy drop amount multiplier | 1 | Multiplies ordinary creature drop quantities for event enemies, after other mods. Fractional amounts use a stable roll. Does not duplicate Epic Loot equipment or change completion rewards; use the biome chances to control Epic Loot drops. |
 | Boss drop amount multiplier | 1 | Multiplies ordinary creature drop quantities for event bosses. Independent of normal event enemies. Epic Loot equipment and completion rewards are unchanged. |
+| Monstrum Epic Loot fallback | true | If a Monstrum event enemy has no Epic Loot table, use a similar vanilla creature. Existing loot tables and event drop limits still apply. Does not change wild enemies. |
 
 
 ### Event creatures
@@ -611,10 +635,12 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Use loaded mod materials | true | Build supply choices from recipes for Epic Loot's biome equipment, including installed mod gear. Missing integrations use vanilla supplies. Progression limits still apply. |
+| Use loaded mod materials | true | Choose supplies from loaded gear recipes and supported creature drops. Missing mods use vanilla supplies. Progression limits still apply. |
 | Supply types per reward | 2 | Different materials chosen for each player's completion reward. Supplies are rolled once when the event succeeds. |
 | Minimum supply amount | 2 | Minimum amount of each automatically chosen supply, before the normal reward multiplier. |
 | Maximum supply amount | 5 | Maximum amount of each automatically chosen supply, before the normal reward multiplier. |
+| Include Monstrum supplies | true | Add materials from loaded Monstrum creatures to automatic completion supplies for their biome. Uses the normal supply count and amount. Monstrum is optional. |
+| Include Monstrum trophies | false | Also allow regular Monstrum creature trophies in automatic supplies. Boss trophies and unique boss weapons stay in their normal drop tables. |
 
 
 ### Ocean
