@@ -11,9 +11,11 @@ Odin's wrath, cleanup trials and raids for Valheim. By Dova.
 - Personal loot rewards and stamina, health or Eitr blessings.
 - Event music, weather, boundaries and limited returns after death.
 - Litter Bin icons above event enemies, with a boss icon beside them for bosses and mini-bosses.
-- Saved event progress and cooldowns that start after events end.
-- Four difficulty presets for each mode, with shark and serpent choices for Ocean events.
-- Synced admin settings for each event type, all altars and individual bins.
+- Saved event progress and starting settings. Cooldowns start after events end; replacing a player bin does not reset them.
+- Six difficulty presets, from Relaxed to Cataclysm, with shark and serpent choices for Ocean events.
+- Admin settings with Apply, Discard and Undo, plus separate controls for each event type, altar and bin.
+- A compact tracker, personal results, boss shield countdowns and altar readiness colours.
+- Optional equipment bad-luck protection and saved reward history.
 
 Use a Litter Bin with **Alt + E**, then press again to confirm. Sea Offerings use the same two-step confirmation at sea.
 

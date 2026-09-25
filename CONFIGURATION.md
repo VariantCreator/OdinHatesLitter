@@ -35,28 +35,32 @@ Config-file keys inside each mode use `Original section / Setting name`. For exa
 
 ## Presets
 
-Open **Presets** inside an event folder or **Litter Altars**. Choose **Relaxed**, **Balanced**, **Veteran** or **Brutal**, then apply it to the whole event or one category. Applying a preset replaces those settings. Existing settings stay as they are until an admin applies one. Finish active events of that type first.
+Open **Presets** inside an event folder or **Litter Altars**. Choose **Relaxed**, **Balanced**, **Veteran**, **Brutal**, **Nightmare** or **Cataclysm**, then apply it to the whole event or one category. Applying a preset replaces those settings. Saved settings stay as they are until an admin applies one; bins using a named built-in preset use its updated values. Active events keep their starting settings by default, so changes affect the next event. If Keep active event settings is off, finish that event type before applying a preset.
 
 **Litter Altars > Presets** applies to land altars. **Litter Altars > Ocean - Presets** applies to Ocean altars, with shark and serpent choices. Each keeps its own settings; applying one does not change the other.
 
-| Preset | Fight | Stamina / health / Eitr regeneration | Equipment chance |
-| --- | --- | --- | --- |
-| Relaxed | Fewer enemies and gentler damage | 10% / 5% / 10% | 10% |
-| Balanced | Moderate waves and enemy strength | 15% / 8% / 15% | 15% |
-| Veteran | More waves and tougher enemies | 18% / 10% / 18% | 20% |
-| Brutal | Harder fights with capped spawns | 20% / 12% / 20% | 25% |
+| Preset | Enemy health / damage | Stamina / health / Eitr regeneration | Blessing length | Equipment chance |
+| --- | --- | --- | --- | --- |
+| Relaxed | 1x / 0.9x | 15% / 8% / 15% | 3 minutes | 15% |
+| Balanced | 1.35x / 1.15x | 20% / 12% / 20% | 3.5 minutes | 25% |
+| Veteran | 1.75x / 1.4x | 25% / 16% / 25% | 4 minutes | 35% |
+| Brutal | 2.25x / 1.7x | 30% / 20% / 30% | 4.5 minutes | 45% |
+| Nightmare | 3x / 2.05x | 35% / 24% / 35% | 5 minutes | 60% |
+| Cataclysm | 4x / 2.5x | 40% / 30% / 40% | 6 minutes | 75% |
 
-Blessings last three minutes. Equipment is a chance for **one item per player when the event ends**, separate from enemy drops. Boss Raid completion chances are 20%, 30%, 40% and 50%. Peaceful cleanup gives a smaller material reward without equipment. High-tier enchanting materials and equipment follow each player's progression. Ancient equipment remains rare.
+Equipment is a chance for **one item per player when the event ends**, separate from enemy drops. Boss Raid chances are 30%, 45%, 60%, 75%, 90% and 100%. Higher difficulties give more coins and materials, better rarity odds, and stronger blessings. Peaceful cleanup gives a smaller material reward without equipment. Rewards still follow each player's progression, and Ancient equipment remains rare.
 
 Whole-event presets cover timing, cooldowns, solo and group counts, waves, mini-bosses, health, damage, sizes, enemy drops, completion loot, equipment, modded supplies, XP, blessings, participation, lives, litter, placement, atmosphere and notices. Each mode keeps only the settings it uses. Appearance and messages return to standard defaults. Server permissions, world generation, individual bin overrides and custom raid phases stay in place.
 
-Wrath and Cleanup Trial presets last up to ten minutes. Endless raids range from eight to fifteen minutes; Boss Raids range from fifteen to thirty. Waves, music, weather and the boundary follow the event timer. Event cooldowns start afterward. Land altars retain 12 litter piles plus 10 per player, double-size litter without a ring, and a 45-minute cooldown.
+Wrath, Cleanup Trial and altar presets last 10 to 15 minutes. Endless raids range from 10 to 20 minutes; Boss Raids range from 15 to 40. Higher tiers have more waves and stronger bosses, with limits on living enemies. Waves, music, weather and the boundary follow the event timer. Cooldowns start afterward. Land altars retain 12 litter piles plus 10 per player, double-size litter without a ring, and a 45-minute cooldown.
 
 Ocean presets offer **Serpents**, **Sharks** or **Sharks and serpents** at every difficulty. Sharks require Monstrum; unavailable sharks fall back to serpents. Both sea modes have their own counts, waves, loot, XP and sailing radius, with no litter collection. Ocean supplies use private progression when available, with world progress as the fallback.
 
-Admin bins can choose a built-in preset in **Settings preset**. For Boss Raid bins, choose a **Phase preset** and press **Use these boss phases**, then save. Relaxed has one phase. The others warn before a rage phase at half health and add limited reinforcements. Custom bin values still take priority over the selected preset.
+Admin bins can choose a built-in preset in **Settings preset**. For Boss Raid bins, choose a **Phase preset** and press **Use these boss phases**, then save. Relaxed has one phase. The others warn before a rage phase at half health and add limited reinforcements. Nightmare and Cataclysm add a final stand at 20% health. Custom bin values still take priority over the selected preset.
 
-Enemy drops are reduced separately from completion rewards. Wacky MMO XP stays below the normal rate in all four presets. CLLC levels, custom creatures and other server modifiers still affect difficulty; individual settings remain editable after applying a preset.
+Enemy drops are limited separately from completion rewards. Ocean creatures keep reduced meat and scale amounts. Wacky MMO enemy XP ranges from 25% to 100%; boss XP ranges from about 33% to 150%. CLLC levels, custom creatures and other server modifiers still affect difficulty. Every setting remains editable after applying a preset.
+
+In Configuration Manager, edits stay local until **Apply changes**. **Discard** cancels pending edits; **Undo last apply** restores the previous values if nobody has changed them since. The server checks admin access and confirms the update. Preset Apply buttons send their selected preset directly. File edits and other supported editors still sync automatically in short batches. **Retry sync** is only needed if a player missed an update.
 
 ## Reward previews
 
@@ -68,7 +72,7 @@ The buttons roll a sample for one eligible player, including the correct bin mul
 
 ## Blessings
 
-Each event mode has a **Blessings** section for **Odin's Forgiveness**. Set **Extra stamina regeneration (%)**, **Extra health regeneration (%)** and **Extra Eitr regeneration (%)** independently from 0 to 200. Zero disables that type. Without a preset, the default is 15% stamina regeneration for 180 seconds; health and Eitr start at zero. The four difficulty presets enable all three.
+Each event mode has a **Blessings** section for **Odin's Forgiveness**. Set **Extra stamina regeneration (%)**, **Extra health regeneration (%)** and **Extra Eitr regeneration (%)** independently from 0 to 200. Zero disables that type. Without a preset, the default is 15% stamina regeneration for 180 seconds; health and Eitr start at zero. All six difficulty presets enable all three.
 
 All enabled types use **Blessing duration (seconds)** and the same reward cooldown. Health improves normal regeneration rather than providing an instant heal. Eitr regeneration does not create an Eitr pool. The tooltip lists the enabled bonuses. Changes sync automatically; only admins and hosts can edit them. Each mode and admin bin can have different values. Existing stamina settings, presets and bin overrides are retained under the new name.
 
@@ -76,7 +80,7 @@ All enabled types use **Blessing duration (seconds)** and the same reward cooldo
 
 Biome shrines have a central Litter Bin and two layouts per biome. New worlds can generate up to six shrines per biome by default. For existing worlds, install Upgrade World, run `odin_arenas`, review the queue, then run `start`. See [Arena locations](ARENAS.md) for the location IDs and details.
 
-**Litter Altars** contains shared controls for generation, event area, enemies, waves, rewards, litter, atmosphere and messages. Land and Ocean altars keep separate event settings. Existing values carry over on the first load. Changes apply to existing and new altars; individual bin settings and presets take priority. All settings sync from the server. Ocean altars use sea combat without litter collection, with a radius of 160 metres. Land altars use 40 metres. Changing the event radius does not move the decorations.
+**Litter Altars** contains shared controls for generation, event area, enemies, waves, rewards, litter, atmosphere and messages. Land and Ocean altars keep separate event settings. Existing values carry over on the first load. Changes apply to future altar events; individual bin settings and presets take priority. All settings sync from the server. Ocean altars use sea combat without litter collection, with a radius of 160 metres. Land altars use 40 metres. Changing the event radius does not move the decorations.
 
 Land altar defaults are 200% litter size, no glow ring, and 12 piles plus 10 per player, including the starter. That means 22 solo or 32 with two players, up to the group cap of 100. Altars wait 45 minutes after an event ends.
 
@@ -94,7 +98,7 @@ Open the bin's inventory to see its admin menu. Regular players cannot see or us
 - **Access:** public use near bases, approval and deliberate removal of an empty bin.
 - **Name, preset and raid phases:** name the event, choose a saved preset, edit phases, copy settings, set messages and override individual settings.
 
-Save Area or Event/Creatures changes using that page's Save button. Save detailed overrides with **Save this bin**. Editing is locked during an active event. Admin bins are protected from accidental damage or debug removal; use the confirmed removal button after emptying the bin and finishing its event.
+Save Area or Event/Creatures changes using that page's Save button. Each detailed setting shows whether it comes from the mode, altar, preset or this bin. **Reset to inherited value** removes just that override. Save detailed changes with **Save this bin**. Editing is locked during an active event. Admin bins are protected from accidental damage or debug removal; use the confirmed removal button after emptying the bin and finishing its event.
 
 Settings resolve in this order: **this bin's overrides, its named preset, shared altar settings for altars, its event mode**. A star beside a detailed setting means this bin overrides it. **Use inherited values for this category** clears that category's overrides. Other bins are unaffected.
 
@@ -151,7 +155,15 @@ Adds support **1-20 creatures per call**, an alive limit, a weighted enemy list 
 
 CLLC choices come from the installed version. Creature effects apply to creature champions; true bosses use boss affixes. Effects that create untracked copies are excluded. CLLC is optional; stars and ordinary attributes work without it.
 
+## Event display and results
+
+**Compact event panel** groups the objective, timer, waves, carried litter and returns under the event name and difficulty. Existing HUD position, size and opacity settings still apply. **Show event results** adds a personal summary after the event; it waits while the inventory is open. Boss nameplates show the phase and remaining shield time, with a warning before scheduled adds.
+
+Ready altars glow softly gold, active altars use their biome colour, and cooling altars have dim blue runes. **Show altar readiness** turns these idle colours off.
+
 ## Rewards, drops and XP
+
+**Increase chance after missed equipment** adds 5 percentage points per further missed combat equipment roll after the first two misses, up to a 25-point bonus. All three values are configurable. Success resets the bonus. Records stay separate for each player, mode, progression tier and difficulty, and survive world saves. Cleanup, failures and previews do not build a bonus. **Recent equipment to remember** defaults to five; use zero to allow repeats normally.
 
 Completion rewards are separate from enemy drops. Gear chance is one roll per eligible player at completion, not per kill. **100%** guarantees that roll; it does not mean 100 items.
 
@@ -194,6 +206,10 @@ Cancellation requires confirmation and can return the offering when it is still 
 Optional integrations use the installed mod data and fall back when an API is unavailable. Breaking game or dependency updates can still require a new build. Keep the same content mods on the server and clients.
 
 ## Full reference
+
+Ordinary player bins share a personal cooldown for each mode. Removing or replacing a bin does not clear it, including after a reconnect or restart. Admin-placed bins keep separate cooldowns.
+
+**Keep active event settings** is on by default. An event keeps its starting rules, rewards and radius through a restart; future events use the newly applied values.
 
 Defaults apply to new configs. Existing custom values are kept. Event settings below are available under their relevant mode categories.
 
@@ -398,6 +414,10 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Keep the wrath meter visible | false | Keep the ordinary wrath count visible until it is cleared. Off hides it after the display timer. Next judgment and active event countdowns stay visible either way. |
 | Hide wrath after (seconds) | 8 | Time to show the ordinary wrath count after it changes when Keep the wrath meter visible is off. Does not hide Next judgment or active event countdowns. |
 | Distance from top of screen (pixels) | 155 | Vertical position of the wrath meter and event counters at 1080p. Larger values move the display down. Scales with screen resolution; adjust to leave room for status effects and other HUD mods. |
+| Compact event panel | true | Keep the event name, difficulty, objective, timer and returns in one panel. Off uses the simple text tracker. |
+| Show event results | true | Show personal contribution, rewards and blessings after an event, or explain why no reward was earned. |
+| Results duration (seconds) | 16 | How long the event results stay visible. The panel waits while your inventory is open. |
+| Show boss phase indicators | true | Show the current boss phase and a shield countdown on its nameplate. Warn the area before reinforcements arrive. |
 
 
 ### Drop protection
@@ -476,9 +496,14 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Equipment chance per player (%) | 15 | Chance for one equipment item per eligible player after a land wrath event. Placed-bin trials and Ocean events have their own chances. Does not change enemy drops. |
 | Maximum equipment rarity | Ancient | Highest allowed equipment rarity. Unavailable tiers in an older Epic Loot version are skipped. |
 | Balance equipment types | true | Choose a weapon type or armor slot first, then an item. This keeps large armor lists from crowding out other gear. |
-| Avoid recent equipment repeats | true | Avoid the last three equipment rewards for each player while the server is running, when another choice is available. |
+| Avoid recent equipment repeats | true | Prefer gear outside the player's recent reward history when another choice is available. The history survives restarts. Set its length with Recent equipment to remember. |
 | Include Epic Loot registered gear | true | Add loaded equipment from Epic Loot's biome item lists, including compatible modded gear. Your custom equipment choices are still included. |
 | Match equipment to player progress | true | Cap land equipment to the Progression source in Rewards. Ocean always uses that source to choose its equipment tier. Does not change enemy drops. |
+| Increase chance after missed equipment | true | Missed combat equipment rolls gradually improve the next equipment chance. Tracked per player, event mode, progression tier and difficulty. Cleanup and failed events do not count. |
+| Misses before equipment chance increases | 2 | Number of missed combat equipment rolls before the chance starts increasing. |
+| Equipment chance added per miss (%) | 5 | Percentage points added for each further missed equipment reward. A successful equipment reward resets the bonus. |
+| Maximum equipment chance bonus (%) | 25 | Maximum bonus from missed equipment rolls. Total chance never exceeds 100%; rarity and progression rules stay the same. |
+| Recent equipment to remember | 5 | Equipment remembered per player, mode, reward tier and difficulty when Avoid recent equipment repeats is enabled. Survives server restarts; repeats remain possible if the pool has no alternatives. |
 
 
 ### Epic Loot materials
@@ -833,6 +858,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Prevent overlapping event areas | true | Keep event circles apart so their domes and objectives do not conflict. |
 | Event announcement destination | Automatic | Send event starts and results through an installed server mod. Automatic uses Discord Connector when installed, otherwise ServerGuard. Both sends through both integrations. Variant Announcements keeps its separate in-game notices. Requires the chosen mod's server webhook and event messages to be enabled. |
 | Write detailed logs | false | Log tracked world drops and encounter decisions. |
+| Keep active event settings | true | Events keep the settings they started with, including after a restart. Admin edits apply to new events. Turn off to let new events follow live settings. |
 
 
 ### Single boss events
@@ -868,6 +894,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Starting land event radius (metres) | 40 | Shared radius for land altar events. Applies to existing altars too. A radius set on an individual bin takes priority. Does not move the altar decorations. |
 | Starting ocean event radius (metres) | 160 | Shared sailing radius for ocean altars. A radius set on an individual bin takes priority. |
 | Litter fills the event area | true | Spread altar litter across the full event radius, leaving two metres inside the boundary. A bin's own maximum litter distance takes priority. Off uses the Litter placement distances. Ocean altars have no litter. |
+| Show altar readiness | true | Ready altars have a soft golden glow. Active altars use their biome colour and lit braziers. Cooling altars use dim blue runes. |
 | Meadows - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
 | Black Forest - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
 | Swamp - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |

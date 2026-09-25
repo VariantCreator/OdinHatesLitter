@@ -1,13 +1,16 @@
+# 1.5.6
+
+- Tougher presets and better rewards, plus Nightmare and Cataclysm tiers.
+- Cleaner event displays, results and boss warnings.
+- Added Apply, Discard and Undo for admin settings. Reduced settings lag.
+- Events keep their settings after restarts. Replacing a bin no longer resets its cooldown.
+- Added equipment reward protection and altar status lights.
+
 # 1.5.5
 
-- Added biome altars with shared settings and separate land and Ocean presets.
-- Added four difficulty presets for enemies, rewards, XP and blessings.
-- Added shark, serpent and mixed Ocean presets, plus boss phase presets.
-- Added enemy icons, boss markers and creature size settings.
+- Added biome altars with shared settings and land or Ocean presets.
+- Added shark, serpent and mixed Ocean presets, boss phases and creature sizes.
 - Added Venture Floating Items support and server event announcements.
-- Event cooldowns now start after events end.
-- Added start confirmations and reward previews by event, biome and progression.
-- Tidied the settings menu and fixed cramped preset controls.
 
 # 1.5.4
 

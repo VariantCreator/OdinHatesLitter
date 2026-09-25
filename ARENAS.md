@@ -6,7 +6,7 @@ Shrines have two layouts per biome. By default, a new world can place up to six 
 
 ## Add them to an existing world
 
-1. Install Odin Hates Litter **1.5.5** on the server and every client.
+1. Install Odin Hates Litter **1.5.6** on the server and every client.
 2. Install **Upgrade World** on the server and the admin client. Keep a world backup before adding locations.
 3. Set the counts under **Litter Altars > World generation**, then run `odin_arenas` in the game console as an admin.
 4. Review Upgrade World's queued operation. Run `start` to apply it.
