@@ -41,14 +41,14 @@ Open **Presets** inside an event folder or **Litter Altars**. Choose **Relaxed**
 
 | Preset | Enemy health / damage | Stamina / health / Eitr regeneration | Blessing length | Equipment chance |
 | --- | --- | --- | --- | --- |
-| Relaxed | 1x / 0.9x | 15% / 8% / 15% | 3 minutes | 15% |
-| Balanced | 1.35x / 1.15x | 20% / 12% / 20% | 3.5 minutes | 25% |
-| Veteran | 1.75x / 1.4x | 25% / 16% / 25% | 4 minutes | 35% |
-| Brutal | 2.25x / 1.7x | 30% / 20% / 30% | 4.5 minutes | 45% |
-| Nightmare | 3x / 2.05x | 35% / 24% / 35% | 5 minutes | 60% |
-| Cataclysm | 4x / 2.5x | 40% / 30% / 40% | 6 minutes | 75% |
+| Relaxed | 1x / 0.9x | 25% / 10% / 25% | 10 minutes | 100% |
+| Balanced | 1.35x / 1.15x | 40% / 20% / 40% | 12 minutes | 100% |
+| Veteran | 1.75x / 1.4x | 60% / 30% / 60% | 15 minutes | 100% |
+| Brutal | 2.25x / 1.7x | 75% / 40% / 75% | 18 minutes | 100% |
+| Nightmare | 3x / 2.05x | 90% / 45% / 90% | 20 minutes | 100% |
+| Cataclysm | 4x / 2.5x | 100% / 50% / 100% | 25 minutes | 100% |
 
-Equipment is a chance for **one item per player when the event ends**, separate from enemy drops. Boss Raid chances are 30%, 45%, 60%, 75%, 90% and 100%. Higher difficulties give more coins and materials, better rarity odds, and stronger blessings. Peaceful cleanup gives a smaller material reward without equipment. Rewards still follow each player's progression, and Ancient equipment remains rare.
+Every preset gives each eligible player coins and materials on completion, plus a **100% roll for one equipment item after combat**. Equipment still needs a valid item in the player's reward pool. Higher difficulties give more coins and materials, better rarity odds, and stronger blessings. Peaceful cleanup gives coins, materials and blessings without equipment. Rewards follow each player's progression, and Ancient equipment remains rare.
 
 Whole-event presets cover timing, cooldowns, solo and group counts, waves, mini-bosses, health, damage, sizes, enemy drops, completion loot, equipment, modded supplies, XP, blessings, participation, lives, litter, placement, atmosphere and notices. Each mode keeps only the settings it uses. Appearance and messages return to standard defaults. Server permissions, world generation, individual bin overrides and custom raid phases stay in place.
 
@@ -58,7 +58,7 @@ Ocean presets offer **Serpents**, **Sharks** or **Sharks and serpents** at every
 
 Admin bins can choose a built-in preset in **Settings preset**. For Boss Raid bins, choose a **Phase preset** and press **Use these boss phases**, then save. Relaxed has one phase. The others warn before a rage phase at half health and add limited reinforcements. Nightmare and Cataclysm add a final stand at 20% health. Custom bin values still take priority over the selected preset.
 
-Enemy drops are limited separately from completion rewards. Ocean creatures keep reduced meat and scale amounts. Wacky MMO enemy XP ranges from 25% to 100%; boss XP ranges from about 33% to 150%. CLLC levels, custom creatures and other server modifiers still affect difficulty. Every setting remains editable after applying a preset.
+Enemy drops are separate from completion rewards. Presets halve ordinary material amounts on land and use a quarter at sea. Each enemy can drop at most 8 of each material on land or 6 at sea; bosses and mini-bosses have caps of 16 and 12. These caps apply after level and quantity multipliers. They do not cap Epic Loot equipment or completion rewards. Admins can change the caps or set them to zero to remove them. Wacky MMO enemy XP ranges from 25% to 100%; boss XP ranges from about 33% to 150%. CLLC levels, custom creatures and other server modifiers still affect difficulty. Every setting remains editable after applying a preset.
 
 In Configuration Manager, edits stay local until **Apply changes**. **Discard** cancels pending edits; **Undo last apply** restores the previous values if nobody has changed them since. The server checks admin access and confirms the update. Preset Apply buttons send their selected preset directly. File edits and other supported editors still sync automatically in short batches. **Retry sync** is only needed if a player missed an update.
 
@@ -72,7 +72,7 @@ The buttons roll a sample for one eligible player, including the correct bin mul
 
 ## Blessings
 
-Each event mode has a **Blessings** section for **Odin's Forgiveness**. Set **Extra stamina regeneration (%)**, **Extra health regeneration (%)** and **Extra Eitr regeneration (%)** independently from 0 to 200. Zero disables that type. Without a preset, the default is 15% stamina regeneration for 180 seconds; health and Eitr start at zero. All six difficulty presets enable all three.
+Each event mode has a **Blessings** section for **Odin's Forgiveness**. Set **Extra stamina regeneration (%)**, **Extra health regeneration (%)** and **Extra Eitr regeneration (%)** independently from 0 to 200. Zero disables that type. New settings start with 25% stamina, 10% health and 25% Eitr regeneration for ten minutes. Existing values are kept; apply a preset to the Blessings category to use its new bonuses and duration. All six difficulty presets enable all three.
 
 All enabled types use **Blessing duration (seconds)** and the same reward cooldown. Health improves normal regeneration rather than providing an instant heal. Eitr regeneration does not create an Eitr pool. The tooltip lists the enabled bonuses. Changes sync automatically; only admins and hosts can edit them. Each mode and admin bin can have different values. Existing stamina settings, presets and bin overrides are retained under the new name.
 
@@ -328,10 +328,10 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Setting | Default | What it does |
 | --- | --- | --- |
 | Enable blessing | true | Give eligible contributors Odin's Forgiveness after cleanup or victory. The blessing boosts the regeneration types configured below. Reward cooldowns also apply. |
-| Extra stamina regeneration (%) | 15 | Extra stamina regeneration percentage from Odin's reward. |
-| Extra health regeneration (%) | 0 | Extra health regeneration from Odin's Forgiveness. Zero disables this bonus. Increases normal health regeneration; does not instantly heal or add maximum health. |
-| Extra Eitr regeneration (%) | 0 | Extra Eitr regeneration from Odin's Forgiveness. Zero disables this bonus. Does not grant an Eitr pool to a player without one. |
-| Blessing duration (seconds) | 180 | Duration of Odin's Forgiveness in seconds. All enabled regeneration bonuses last this long. |
+| Extra stamina regeneration (%) | 25 | Extra stamina regeneration percentage from Odin's reward. |
+| Extra health regeneration (%) | 10 | Extra health regeneration from Odin's Forgiveness. Zero disables this bonus. Increases normal health regeneration; does not instantly heal or add maximum health. |
+| Extra Eitr regeneration (%) | 25 | Extra Eitr regeneration from Odin's Forgiveness. Zero disables this bonus. Does not grant an Eitr pool to a player without one. |
+| Blessing duration (seconds) | 600 | Duration of Odin's Forgiveness in seconds. All enabled regeneration bonuses last this long. |
 
 
 ### Cleanup
@@ -568,6 +568,8 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Allow boss drops | true | Allow ordinary and Epic Loot drops from event bosses when separate boss loot settings are on. Completion rewards are separate. |
 | Enemy drop amount multiplier | 1 | Multiplies ordinary creature drop quantities for event enemies, after other mods. Fractional amounts use a stable roll. Does not duplicate Epic Loot equipment or change completion rewards; use the biome chances to control Epic Loot drops. |
 | Boss drop amount multiplier | 1 | Multiplies ordinary creature drop quantities for event bosses. Independent of normal event enemies. Epic Loot equipment and completion rewards are unchanged. |
+| Maximum amount per material from enemies | 8 | Maximum of each ordinary drop item from one event enemy, including adds. Applied after level and quantity multipliers. Zero removes the cap. Does not limit Epic Loot equipment or completion rewards. |
+| Maximum amount per material from bosses | 16 | Maximum of each ordinary drop item from one event boss or mini-boss. Applied after level and quantity multipliers. Zero removes the cap. Does not limit Epic Loot equipment or completion rewards. |
 | Monstrum Epic Loot fallback | true | If a Monstrum event enemy has no Epic Loot table, use a similar vanilla creature. Existing loot tables and event drop limits still apply. Does not change wild enemies. |
 
 

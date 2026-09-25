@@ -1,10 +1,11 @@
 # 1.5.6
 
-- Tougher presets and better rewards, plus Nightmare and Cataclysm tiers.
+- Tougher presets, better completion loot and guaranteed combat equipment rolls. Added Nightmare and Cataclysm tiers.
+- Capped enemy material drops to reduce large piles of loot.
 - Cleaner event displays, results and boss warnings.
 - Added Apply, Discard and Undo for admin settings. Reduced settings lag.
 - Events keep their settings after restarts. Replacing a bin no longer resets its cooldown.
-- Added equipment reward protection and altar status lights.
+- Stronger 10–25 minute blessings, equipment reward protection and altar status lights.
 
 # 1.5.5
 
