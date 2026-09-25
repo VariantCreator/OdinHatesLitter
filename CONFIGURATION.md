@@ -17,15 +17,15 @@ Install the same build on the server and every client. Server settings sync auto
 
 In shudnal's Configuration Manager split view, expand a mode folder to see its categories: enemy spawning, enemy strength, drops, waves, mini-bosses, rewards, music, weather and more. Ocean has two folders: **Judgment** and **Endless Raid**. Searching shows matching settings inside closed folders. Other managers and list view keep labeled categories. Only relevant settings appear; existing keys and values are kept.
 
-Both Ocean modes have independent enemies, waves, sailing radius, drops, rewards, XP, atmosphere and messages. Neither has litter piles, bin offerings, cleanup rewards or terrain-placement controls. F1 shows settings wherever you stand. Sea encounters apply in Ocean water or on a Leviathan, even if its seabed reports another biome. A land bin's selected enemy biome cannot turn it into an Ocean encounter.
+Both Ocean modes have independent enemies, waves, sailing radius, drops, rewards, XP, atmosphere and messages. Neither has litter piles, cleanup rewards or terrain-placement controls. Altar bins use **Litter Altars** instead, with separate sea controls in its Ocean categories. F1 shows settings wherever you stand. Sea encounters apply in Ocean water or on a Leviathan, even if its seabed reports another biome. A land bin's selected enemy biome cannot turn it into an Ocean encounter.
 
 Old Ocean settings that used land waves are copied into independent sea wave settings during the upgrade. Later land changes do not change sea battles.
 
 ### Sea Offering
 
-Craft a **Sea Offering** at a level-one workbench. The default recipe is **Coins 20, Resin 10, Chitin 5**. Use it in the Ocean to preview the raid; use it again within 20 seconds to confirm. Starting consumes one offering. Rejected starts return it, with overflow kept afloat.
+Craft a **Sea Offering** at a level-one workbench. The default recipe is **Coins 20, Resin 10, Chitin 5**. Use it in the Ocean, then use it again within 20 seconds to confirm the raid. Starting consumes one offering. Rejected starts return it, with overflow kept afloat.
 
-Open **Ocean > Endless Raid > Sea Offering** for crafting materials, permissions, event duration, arrival warning and player cooldown. Defaults are ten minutes total, a 30-second arrival warning and a 15-minute start cooldown. The warning counts toward the event timer. Music, weather and boundary follow that same timer. **Waves** controls survival, fixed waves or a single wave. Ordinary Ocean judgments keep their existing behavior and separate cooldown.
+Open **Ocean > Endless Raid > Sea Offering** for crafting materials, permissions, event duration, arrival warning and player cooldown. Defaults are ten minutes total, a 30-second arrival warning and a 15-minute cooldown after the event ends. The warning counts toward the event timer. Music, weather and boundary follow that same timer. **Waves** controls survival, fixed waves or a single wave. Ordinary Ocean judgments keep their own cooldown.
 
 Crafting accepts up to eight `PrefabName amount` entries, separated by commas. Missing materials disable the recipe until they become available or the recipe is corrected. Recipe changes sync automatically. Server admins can restrict using offerings to admins while still letting other players help.
 
@@ -33,11 +33,56 @@ Existing settings are copied into the new modes on the first load. Later changes
 
 Config-file keys inside each mode use `Original section / Setting name`. For example, `[Boss Raid]` contains `Event creatures / Enemy damage multiplier`. The full reference below lists the original sections and defaults to help find each setting. Hidden legacy entries remain for migration; use the mode entries for new changes.
 
+## Presets
+
+Open **Presets** inside an event folder or **Litter Altars**. Choose **Relaxed**, **Balanced**, **Veteran** or **Brutal**, then apply it to the whole event or one category. Applying a preset replaces those settings. Existing settings stay as they are until an admin applies one. Finish active events of that type first.
+
+**Litter Altars > Presets** applies to land altars. **Litter Altars > Ocean - Presets** applies to Ocean altars, with shark and serpent choices. Each keeps its own settings; applying one does not change the other.
+
+| Preset | Fight | Stamina / health / Eitr regeneration | Equipment chance |
+| --- | --- | --- | --- |
+| Relaxed | Fewer enemies and gentler damage | 10% / 5% / 10% | 10% |
+| Balanced | Moderate waves and enemy strength | 15% / 8% / 15% | 15% |
+| Veteran | More waves and tougher enemies | 18% / 10% / 18% | 20% |
+| Brutal | Harder fights with capped spawns | 20% / 12% / 20% | 25% |
+
+Blessings last three minutes. Equipment is a chance for **one item per player when the event ends**, separate from enemy drops. Boss Raid completion chances are 20%, 30%, 40% and 50%. Peaceful cleanup gives a smaller material reward without equipment. High-tier enchanting materials and equipment follow each player's progression. Ancient equipment remains rare.
+
+Whole-event presets cover timing, cooldowns, solo and group counts, waves, mini-bosses, health, damage, sizes, enemy drops, completion loot, equipment, modded supplies, XP, blessings, participation, lives, litter, placement, atmosphere and notices. Each mode keeps only the settings it uses. Appearance and messages return to standard defaults. Server permissions, world generation, individual bin overrides and custom raid phases stay in place.
+
+Wrath and Cleanup Trial presets last up to ten minutes. Endless raids range from eight to fifteen minutes; Boss Raids range from fifteen to thirty. Waves, music, weather and the boundary follow the event timer. Event cooldowns start afterward. Land altars retain 12 litter piles plus 10 per player, double-size litter without a ring, and a 45-minute cooldown.
+
+Ocean presets offer **Serpents**, **Sharks** or **Sharks and serpents** at every difficulty. Sharks require Monstrum; unavailable sharks fall back to serpents. Both sea modes have their own counts, waves, loot, XP and sailing radius, with no litter collection. Ocean supplies use private progression when available, with world progress as the fallback.
+
+Admin bins can choose a built-in preset in **Settings preset**. For Boss Raid bins, choose a **Phase preset** and press **Use these boss phases**, then save. Relaxed has one phase. The others warn before a rage phase at half health and add limited reinforcements. Custom bin values still take priority over the selected preset.
+
+Enemy drops are reduced separately from completion rewards. Wacky MMO XP stays below the normal rate in all four presets. CLLC levels, custom creatures and other server modifiers still affect difficulty; individual settings remain editable after applying a preset.
+
+## Reward previews
+
+Open **Admin and server > Reward previews**. Choose an event, current settings or a preset, a land biome, and a progression tier. Ocean modes always use Ocean rewards. You can check any biome without travelling there.
+
+The buttons roll a sample for one eligible player, including the correct bin multipliers and blessings. Cleanup previews appear only for modes with cleanup rewards. Item and equipment chances are shown separately. Press again for another roll. Nothing is granted or applied.
+
+**Current settings** uses synced mode or altar defaults, without individual bin overrides. **Configured progression (you)** uses your reward rules; starter and group rules use your progress for this single-player sample. You can instead select world progress or a specific tier. Enemy drops, contribution requirements and reward cooldowns remain separate.
+
 ## Blessings
 
-Each event mode has a **Blessings** section for **Odin's Forgiveness**. Set **Extra stamina regeneration (%)**, **Extra health regeneration (%)** and **Extra Eitr regeneration (%)** independently from 0 to 200. Zero disables that type. The default remains 15% stamina regeneration for 180 seconds; health and Eitr start at zero.
+Each event mode has a **Blessings** section for **Odin's Forgiveness**. Set **Extra stamina regeneration (%)**, **Extra health regeneration (%)** and **Extra Eitr regeneration (%)** independently from 0 to 200. Zero disables that type. Without a preset, the default is 15% stamina regeneration for 180 seconds; health and Eitr start at zero. The four difficulty presets enable all three.
 
 All enabled types use **Blessing duration (seconds)** and the same reward cooldown. Health improves normal regeneration rather than providing an instant heal. Eitr regeneration does not create an Eitr pool. The tooltip lists the enabled bonuses. Changes sync automatically; only admins and hosts can edit them. Each mode and admin bin can have different values. Existing stamina settings, presets and bin overrides are retained under the new name.
+
+## Litter Altars
+
+Biome shrines have a central Litter Bin and two layouts per biome. New worlds can generate up to six shrines per biome by default. For existing worlds, install Upgrade World, run `odin_arenas`, review the queue, then run `start`. See [Arena locations](ARENAS.md) for the location IDs and details.
+
+**Litter Altars** contains shared controls for generation, event area, enemies, waves, rewards, litter, atmosphere and messages. Land and Ocean altars keep separate event settings. Existing values carry over on the first load. Changes apply to existing and new altars; individual bin settings and presets take priority. All settings sync from the server. Ocean altars use sea combat without litter collection, with a radius of 160 metres. Land altars use 40 metres. Changing the event radius does not move the decorations.
+
+Land altar defaults are 200% litter size, no glow ring, and 12 piles plus 10 per player, including the starter. That means 22 solo or 32 with two players, up to the group cap of 100. Altars wait 45 minutes after an event ends.
+
+**Litter fills the event area** spreads piles across the event radius, leaving two metres inside the boundary. Turn it off to use the shared minimum and maximum distances, or set a distance on an individual bin. Old factory distances switch to this shared default; custom distances remain.
+
+**General and display** controls the icons above event enemies' names, levels and health bars. Bosses and mini-bosses show Valheim's boss icon beside the Litter Bin. Adjust their size, opacity and spacing. Turn off boss icons separately, or hide all event enemy icons. They follow the enemy's normal nameplate visibility.
 
 ## Each admin bin
 
@@ -51,9 +96,23 @@ Open the bin's inventory to see its admin menu. Regular players cannot see or us
 
 Save Area or Event/Creatures changes using that page's Save button. Save detailed overrides with **Save this bin**. Editing is locked during an active event. Admin bins are protected from accidental damage or debug removal; use the confirmed removal button after emptying the bin and finishing its event.
 
-Settings resolve in this order: **this bin's overrides, its named preset, its event mode, inherited defaults**. A star beside a detailed setting means this bin overrides it. **Use inherited values for this category** clears that category's overrides. Other bins are unaffected.
+Settings resolve in this order: **this bin's overrides, its named preset, shared altar settings for altars, its event mode**. A star beside a detailed setting means this bin overrides it. **Use inherited values for this category** clears that category's overrides. Other bins are unaffected.
+
+Every event starts its cooldown after it ends, whether completed or timed out. Active events do not spend any of that wait. Cooldowns pause while the server is offline. A failed bin setup returns the offering without charging a cooldown.
 
 Admin bins have their own event cooldowns. A finished event does not block another ready bin. Ordinary bins also use the player's trial cooldown. Completion reward cooldowns are separate.
+
+## Creature sizes and floating loot
+
+Each mode and admin bin has **Enemy size (%)** and **Boss size (%)** under **Enemy strength**. 100 keeps the normal size; 200 doubles it. Specific overrides use prefab names and percentages, for example `Greydwarf 80, Troll 150`. These replace the general value for that creature. CLLC scaling is included; health and damage have separate settings.
+
+Sea rewards and event creature drops keep their floating marker after the event ends, after stacking and after a reload. With **Venture Floating Items**, they reuse its floating component. Event-marked loot floats even if its item type normally sinks; Venture's rules still control ordinary drops.
+
+## Event announcements
+
+**Admin and server > Event announcement destination** selects Automatic, ServerGuard, Discord Connector, Both or Off. Automatic uses the full server version of Discord Connector when available, otherwise ServerGuard. Configure the chosen mod's webhook and event messages first. Both sends through both mods, so use it only if you want both feeds.
+
+Variant Announcements has its own in-game notice settings. Enable its Odin event notices to show starts and victories there. No extra announcement mod is required to play.
 
 Regular players' bins always use their local biome. An admin may change an approved bin's enemy and completion-reward biome. Progression still limits rewards, not the selected enemies.
 
@@ -88,7 +147,7 @@ Each phase has a warning, stars, health and damage multipliers, minimum health r
 
 **Invulnerability after transition (seconds)** defaults to **5** for each later phase. The boss is also protected throughout that phase's warning, including from poison and burning already applied. Set it to zero to disable transition protection. Remaining protection pauses with the event during a restart.
 
-Adds support **1–20 creatures per call**, an alive limit, a weighted enemy list and either a repeating interval or explicit times such as `20,60,120` seconds after the phase begins. Explicit times replace the interval. The event's overall enemy cap and time limit still apply. Old adds may be cleared on transition. The event ends when its main boss is defeated and its other objectives are complete.
+Adds support **1-20 creatures per call**, an alive limit, a weighted enemy list and either a repeating interval or explicit times such as `20,60,120` seconds after the phase begins. Explicit times replace the interval. The event's overall enemy cap and time limit still apply. Old adds may be cleared on transition. The event ends when its main boss is defeated and its other objectives are complete.
 
 CLLC choices come from the installed version. Creature effects apply to creature champions; true bosses use boss affixes. Effects that create untracked copies are excluded. CLLC is optional; stars and ordinary attributes work without it.
 
@@ -106,7 +165,7 @@ Ocean's **Progression** reward categories include land-biome material and equipm
 
 **Mod rewards** discovers supplies from recipes for Epic Loot's loaded biome equipment, including compatible Therzie gear. **Mod material choices** uses `Auto` by default, or accepts custom item tables. Ocean adds progression supplies. Missing items are skipped; an unavailable supply table uses vanilla items. Excluded equipment and Epic Loot's deny list still apply.
 
-Wacky MMO enemy and boss XP have separate **0–500%** settings in each mode and bin override. `1` is 1%, `100` is normal XP, and `500` is five times normal. The default is about one third. Group shares use the same event rate once.
+Wacky MMO enemy and boss XP have separate **0-500%** settings in each mode and bin override. `1` is 1%, `100` is normal XP, and `500` is five times normal. The default is about one third. Group shares use the same event rate once.
 
 ## Cleanup and participation
 
@@ -264,6 +323,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Setting | Default | What it does |
 | --- | --- | --- |
 | Scale litter with nearby players | false | Add litter for nearby living players when an event begins. Late joiners use the separate Add litter for late helpers setting. |
+| Include starter in litter scaling | false | Count every player, including the starter, for Litter per extra player. With 12 base piles and 10 per player, one player gets 22 piles and two get 32. Off keeps the base count for a solo player. |
 | Add litter for late helpers | true | Add litter when a new player joins while required piles remain unfound. Each player counts once per event. Stops once every pile has been found, even if it still needs returning. Uses Litter per extra player and Group litter limit. |
 | Litter per extra player | 2 | Additional piles for each nearby player when litter scaling is enabled. |
 | Group litter limit | 100 | Maximum piles after group scaling. Applies to both bin trials and regular wrath cleanup. |
@@ -286,7 +346,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Setting | Default | What it does |
 | --- | --- | --- |
 | Minimum distance from bin (metres) | 6 | Inner edge of the litter search area. Existing bins can have individual admin overrides. |
-| Maximum distance from bin (metres) | 14 | Outer edge of the litter search area. Always kept at least 5 metres inside the event boundary. |
+| Maximum distance from bin (metres) | 14 | Outer edge of the litter search area. Kept inside the boundary by five metres, or two at altars. Altars use the full event area unless Litter fills the event area is off or the bin has its own distance. |
 | Minimum space between piles (metres) | 2 | Space between litter piles, including replacement piles. Larger spacing needs a larger search area. |
 | Spread pattern | Even circle | Even circle covers every side of the bin. Random scatters freely. Clusters creates small groups while keeping minimum spacing. |
 | Allow litter on rocks | false | Allow litter on low, open rock tops. Piles rest on the rock surface and are never placed inside it. Temporary bins still use ground. |
@@ -322,6 +382,12 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 
 | Setting | Default | What it does |
 | --- | --- | --- |
+| Show event enemy icons | true | Show a Litter Bin icon above the name, level and health of enemies spawned by Odin Hates Litter. Ordinary creatures keep their usual display. |
+| Show event boss icons | true | Add Valheim's boss icon beside the Litter Bin icon for event bosses and mini-bosses. Requires event enemy icons to be enabled. |
+| Event enemy icon size (pixels) | 28 | Icon size in the game's HUD. Follows the HUD scale. |
+| Event enemy icon spacing (pixels) | 8 | Space above the enemy's nameplate, including level and health indicators. |
+| Event enemy icon opacity (%) | 90 | Visibility of the event enemy icon. Zero hides it. |
+| Event boss icon spacing (pixels) | 4 | Space between the Litter Bin and boss icons. Both use the event enemy icon size and opacity. |
 | Tracker horizontal position (%) | 50 | Horizontal center of the event timer, litter and wave tracker. Vertical position uses Top offset. |
 | Tracker size (%) | 100 | Size of the persistent event tracker and wrath meter. |
 | Tracker width | 650 | Maximum width of the event tracker at 1080p. Long text wraps. |
@@ -351,7 +417,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Protect buildings from event enemies | false | Prevent damage to player-built pieces from creatures summoned by this mod. Does not stop ordinary enemies or player damage. |
 | Allow Odin encounters | true | Odin appears at the threshold and summons enemies if litter remains after his warning. |
 | Final cleanup warning (seconds) | 120 | Time to clean up before enemies arrive. Included in the event time limit: the default ten-minute event gives two minutes to clean up and up to eight minutes to fight. |
-| Encounter cooldown (seconds) | 300 | Controls the Next judgment countdown. Minimum time between Odin visits, starting when an event begins. Stored across relogs. Zero removes this wait; active events must still finish first. |
+| Encounter cooldown (seconds) | 300 | Controls the Next judgment countdown. Wait after an event ends before Odin can return. Saved across restarts and paused while the server is offline. Zero removes this wait; active events must still finish first. |
 | Delay before Odin appears (seconds) | 0 | Wait this long after reaching the wrath threshold before Odin can appear. Zero means immediately. Cleaning below the threshold restarts this delay. This is separate from the pickup grace period and final warning. |
 | Encounter time limit (seconds) | 600 | Maximum time to finish an encounter and earn rewards, including Odin's warning. |
 
@@ -487,6 +553,10 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Enemy health multiplier | 1 | Health of ordinary event enemies after their level is applied. Wild creatures are unchanged. Boss health uses the existing mini-boss and single-boss settings. Applies to new spawns. |
 | Enemy damage multiplier | 1 | Damage dealt by ordinary event enemies. One keeps their usual damage, including other mods. Changes apply during combat. |
 | Boss damage multiplier | 1 | Damage dealt by event mini-bosses and single bosses. Does not change ordinary enemies or world bosses. |
+| Enemy size (%) | 100 | Size of new event enemies. 100 keeps their normal size, 200 doubles it. Includes their hitbox. Health and damage use their own settings. |
+| Boss size (%) | 100 | Size of new event bosses and mini-bosses. Multiplies their usual size, including CLLC scaling. Each event type and admin bin can use different values. |
+| Enemy size overrides | Empty | Size for specific enemy prefabs. Example: Greydwarf 80, Troll 150. Values are percentages from 25 to 500. These replace Enemy size for matching creatures; empty uses Enemy size. |
+| Boss size overrides | Empty | Size for specific event bosses. Example: Troll 150, StoneGolem 120, Serpent 130. Values are percentages from 25 to 500. These replace Boss size for matching creatures; empty uses Boss size. |
 
 
 ### Event dome
@@ -583,7 +653,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Accepted offering items | Wood, Stone, Resin, BeechSeeds, FirCone, GreydwarfEye | Comma-separated prefab names that can pay for a trial. Only plain items are consumed. All other items stay in the bin. |
 | Items needed for a trial | 20 | Total accepted items consumed from the bin when the server approves a trial. Item types can be mixed. |
 | Litter piles to clean | 6 | Piles spread in a full circle around the bin on open ground, from 1 to 100. Pick them up and return the litter. Base stack size is 50; stack-size mods can increase it. Mission litter never adds wrath. |
-| Trial cooldown (seconds) | 900 | Wait before the same bin can run another event. Admin-placed and admin-approved bins have independent cooldowns: finishing one lets you start another ready bin. Ordinary player bins also apply a personal trial cooldown. Cooldowns survive restarts and pause while offline. Reward cooldowns are separate. |
+| Trial cooldown (seconds) | 900 | Wait after an event ends before the same bin can run another event. Admin-placed and admin-approved bins have independent cooldowns: finishing one lets you start another ready bin. Ordinary player bins also apply a personal trial cooldown. Cooldowns survive restarts and pause while offline. Reward cooldowns are separate. |
 | Trial time limit (seconds) | 600 | Time to return every litter pile and defeat the wave. Music, weather and the visible countdown follow this timer. The trial continues if its starter dies or leaves. |
 | Individual bin settings | Empty | Admins can open a placed bin for its Area, Event, Creatures and Access tabs. Set event radius, litter distances and public base access, preview the boundary, or confirm removal of an empty bin. Zero uses server defaults. Finish its event before editing or removing it. |
 
@@ -752,7 +822,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Crafting materials | Coins 20, Resin 10, Chitin 5 | Workbench recipe for one Sea Offering. Use exact item prefabs and whole amounts, separated by commas. Up to eight materials. Example: Coins 20, Resin 10. Missing or invalid materials disable crafting until corrected. Syncs automatically. |
 | Event duration (seconds) | 600 | Total Ocean Endless Raid time, including the arrival warning. Music, weather and the event boundary follow this timer. Waves use this raid's own Ocean wave settings. |
 | Arrival warning (seconds) | 30 | Time to prepare before sea enemies arrive. Limited to half the event duration so the fight has time to begin. |
-| Player cooldown (seconds) | 900 | Wait between starting Ocean Endless Raids. Separate from wrath and regular Ocean judgments. Admin timer resets can clear it; active events continue. |
+| Player cooldown (seconds) | 900 | Wait after an Ocean Endless Raid ends before starting another. Separate from wrath and regular Ocean judgments. Admin timer resets can clear it; active events continue. |
 
 
 ### Server
@@ -761,6 +831,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | --- | --- | --- |
 | Maximum simultaneous events | 8 | Server-wide event limit. New events wait until a slot is available. |
 | Prevent overlapping event areas | true | Keep event circles apart so their domes and objectives do not conflict. |
+| Event announcement destination | Automatic | Send event starts and results through an installed server mod. Automatic uses Discord Connector when installed, otherwise ServerGuard. Both sends through both integrations. Variant Announcements keeps its separate in-game notices. Requires the chosen mod's server webhook and event messages to be enabled. |
 | Write detailed logs | false | Log tracked world drops and encounter decisions. |
 
 
@@ -781,6 +852,31 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | First boss wave | 1 | First wave that may include a boss. |
 | Waves between bosses | 1 | One means every wave; three means every third wave after First boss wave. |
 | Boss health multiplier | 1 | Additional health multiplier for wave bosses. One preserves their normal strength and CLLC level. Event bosses do not unlock world progression or start a separate boss event. |
+
+
+### World arenas
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Generate arena locations | true | Place biome shrines with a Litter Bin in new worlds. Use Upgrade World to add them to existing worlds. Turning this off keeps existing arenas. |
+| Show discovered arenas on the map | true | Reveal each arena's map marker when it is discovered. Does not reveal undiscovered shrines. |
+| Protect arena ground | true | Block ordinary building and digging inside land arenas. Does not change terrain. Reload the area after changing this. Admin terrain tools may bypass it. |
+| Light the shrine during events | true | Light the rune carvings and braziers in sequence when a shrine event begins. |
+| Minimum distance between arenas (metres) | 600 | Minimum spacing between generated arenas. Applies to future location placement. |
+| Minimum distance from world centre (metres) | 700 | Keep generated arenas away from the starting area. Applies to future location placement. |
+| Maximum ground height difference (metres) | 3 | Prefer reasonably level land across the arena. No flattening is applied. Higher values allow more uneven sites. |
+| Starting land event radius (metres) | 40 | Shared radius for land altar events. Applies to existing altars too. A radius set on an individual bin takes priority. Does not move the altar decorations. |
+| Starting ocean event radius (metres) | 160 | Shared sailing radius for ocean altars. A radius set on an individual bin takes priority. |
+| Litter fills the event area | true | Spread altar litter across the full event radius, leaving two metres inside the boundary. A bin's own maximum litter distance takes priority. Off uses the Litter placement distances. Ocean altars have no litter. |
+| Meadows - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
+| Black Forest - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
+| Swamp - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
+| Mountain - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
+| Plains - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
+| Mistlands - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
+| Ash Lands - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
+| Deep North - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
+| Ocean - locations | 6 | Maximum locations in this biome, shared between two layouts. Zero prevents new placements. Existing locations stay. Suitable terrain may limit the actual count. |
 
 
 ### Wrath

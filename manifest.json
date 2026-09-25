@@ -1,8 +1,8 @@
 {
   "name": "OdinHatesLitter",
-  "version_number": "1.5.4",
+  "version_number": "1.5.5",
   "website_url": "https://github.com/VariantCreator/OdinHatesLitter",
-  "description": "Leave litter and face Odin's wrath. Cleanup trials, boss raids and sea battles with personal rewards and optional Monstrum support.",
+  "description": "Cleanup trials, biome altars, raids and sea battles with Odin's wrath, personal rewards and synced admin settings.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2351",
     "ValheimModding-Jotunn-2.30.1",

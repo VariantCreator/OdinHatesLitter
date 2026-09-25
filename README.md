@@ -1,29 +1,32 @@
 # Odin Hates Litter
 
-A Valheim mod by Dova. Leave rubbish behind and Odin will give you something to clean up.
+Odin's wrath, cleanup trials and raids for Valheim. By Dova.
 
-At 100 wrath, Odin summons litter and a bin. Clean up within two minutes, or face the enemies for better rewards. At sea, serpents arrive instead. Helpers earn their own rewards based on their progress.
+## Features
 
-Build a **Litter Bin** under **Hammer > Misc**, add its offering, then press **Alt + E** to preview a trial. Press it again to start. For an Ocean Endless Raid, craft a **Sea Offering** at a workbench and use it at sea twice to confirm.
+- Littering builds wrath and triggers cleanup challenges or enemy attacks.
+- Buildable Litter Bins and biome altars for starting events.
+- Enemy waves, mini-bosses and boss raids with phases and reinforcements.
+- Ocean battles, craftable Sea Offerings and floating loot.
+- Personal loot rewards and stamina, health or Eitr blessings.
+- Event music, weather, boundaries and limited returns after death.
+- Litter Bin icons above event enemies, with a boss icon beside them for bosses and mini-bosses.
+- Saved event progress and cooldowns that start after events end.
+- Four difficulty presets for each mode, with shark and serpent choices for Ocean events.
+- Synced admin settings for each event type, all altars and individual bins.
 
-Events last ten minutes by default. A dome keeps participants inside, with three returns after death. Sea loot stays afloat, and event progress resumes after a restart.
+Use a Litter Bin with **Alt + E**, then press again to confirm. Sea Offerings use the same two-step confirmation at sea.
 
-**Monstrum is optional.** Its creature materials join the reward pools, including sea supplies. Admins can add its enemies and bosses to events by prefab name. Existing enemy lists stay as they are.
+## Compatible mods
 
-## Install
+Epic Loot, Creature Level and Loot Control, Therzie's Monstrum, World Advancement Progression, Wacky Epic MMO System and Resurrection.
 
-Download [OdinHatesLitter.zip](https://github.com/VariantCreator/OdinHatesLitter/releases/latest).
+Also supports Venture Floating Items, Venture Location Reset, Upgrade World, Configuration Manager, Variant Announcements, ServerGuard and Discord Connector.
 
-Requires **BepInExPack Valheim**, **Jotunn 2.30.1+** and **Epic Loot 0.14.10+**. Install the same build on the server and every client. Use a mod manager, or copy the ZIP's `plugins` folder into `BepInEx`. Keep one copy of `OdinHatesLitter.dll` and restart.
+Epic Loot is required. The other integrations are optional.
 
-## Settings
+## Requirements
 
-Open Configuration Manager (**F1**) or edit `BepInEx/config/Dova.OdinHatesLitter.cfg`. Settings sync automatically. Only admins and hosts can change them.
+**BepInExPack Valheim 5.4.2351+**, **Jotunn 2.30.1+** and **Epic Loot 0.14.10+**. The same mod build is required on the server and every client.
 
-Each event mode has its own settings. Admins can open a bin to choose its enemies, boss phases, radius, timer, rewards and messages. **Blessings** controls stamina, health and Eitr regeneration.
-
-[All settings](CONFIGURATION.md) | [Changelog](CHANGELOG.md)
-
-## Permissions
-
-The source code is private. You can use the mod in your game and on your server. Ask before reusing the code or artwork. See [LICENSE.txt](LICENSE.txt).
+[Settings](CONFIGURATION.md) | [Altar guide](ARENAS.md) | [Changelog](CHANGELOG.md) | [Downloads](https://github.com/VariantCreator/OdinHatesLitter/releases/latest) | [License](LICENSE.txt)
