@@ -60,7 +60,9 @@ Admin bins can choose a built-in preset in **Settings preset**. For Boss Raid bi
 
 Enemy drops are separate from completion rewards. Presets halve ordinary material amounts on land and use a quarter at sea. Each enemy can drop at most 8 of each material on land or 6 at sea; bosses and mini-bosses have caps of 16 and 12. These caps apply after level and quantity multipliers. They do not cap Epic Loot equipment or completion rewards. Admins can change the caps or set them to zero to remove them. Wacky MMO enemy XP ranges from 25% to 100%; boss XP ranges from about 33% to 150%. CLLC levels, custom creatures and other server modifiers still affect difficulty. Every setting remains editable after applying a preset.
 
-In Configuration Manager, edits stay local until **Apply changes**. **Discard** cancels pending edits; **Undo last apply** restores the previous values if nobody has changed them since. The server checks admin access and confirms the update. Preset Apply buttons send their selected preset directly. File edits and other supported editors still sync automatically in short batches. **Retry sync** is only needed if a player missed an update.
+In Configuration Manager, edits stay local until **Apply changes**. **Discard** cancels pending edits; **Undo last apply** restores the previous values if nobody has changed them since. The server checks admin access and confirms the update. Preset Apply buttons send their selected preset directly. File edits and other supported editors still sync automatically in short batches.
+
+If settings cannot be confirmed after three attempts, automatic retries pause. Check that everyone has the same build, then reconnect or use **Retry sync** as an admin.
 
 ## Reward previews
 

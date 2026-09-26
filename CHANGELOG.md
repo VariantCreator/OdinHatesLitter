@@ -1,3 +1,9 @@
+# 1.5.7
+
+- Fixed overlapping event notices and added HUD controls for every mode and altar type.
+- Preset combat coins start at 300 and increase with difficulty.
+- Fixed repeated settings sync spam when clients cannot confirm the server settings.
+
 # 1.5.6
 
 - Tougher presets, better completion loot and guaranteed combat equipment rolls. Added Nightmare and Cataclysm tiers.
