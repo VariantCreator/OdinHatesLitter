@@ -48,7 +48,7 @@ Open **Presets** inside an event folder or **Litter Altars**. Choose **Relaxed**
 | Nightmare | 3x / 2.05x | 90% / 45% / 90% | 20 minutes | 100% |
 | Cataclysm | 4x / 2.5x | 100% / 50% / 100% | 25 minutes | 100% |
 
-Every preset gives each eligible player coins and materials on completion, plus a **100% roll for one equipment item after combat**. Equipment still needs a valid item in the player's reward pool. Higher difficulties give more coins and materials, better rarity odds, and stronger blessings. Peaceful cleanup gives coins, materials and blessings without equipment. Rewards follow each player's progression, and Ancient equipment remains rare.
+Every preset gives each eligible player coins and materials on completion, plus a **100% roll for one equipment item after combat**. Equipment still needs a valid item in the player's reward pool. Combat presets start at 300 coins per player on Relaxed. Higher tiers pay roughly 400, 500, 650, 800 and 950 before biome bonuses, with a 1,000-coin limit. Coins are adjusted for each mode's reward multiplier. Higher difficulties also give more materials, better rarity odds, and stronger blessings. Peaceful cleanup gives coins, materials and blessings without equipment. Rewards follow each player's progression, and Ancient equipment remains rare.
 
 Whole-event presets cover timing, cooldowns, solo and group counts, waves, mini-bosses, health, damage, sizes, enemy drops, completion loot, equipment, modded supplies, XP, blessings, participation, lives, litter, placement, atmosphere and notices. Each mode keeps only the settings it uses. Appearance and messages return to standard defaults. Server permissions, world generation, individual bin overrides and custom raid phases stay in place.
 
@@ -157,7 +157,7 @@ CLLC choices come from the installed version. Creature effects apply to creature
 
 ## Event display and results
 
-**Compact event panel** groups the objective, timer, waves, carried litter and returns under the event name and difficulty. Existing HUD position, size and opacity settings still apply. **Show event results** adds a personal summary after the event; it waits while the inventory is open. Boss nameplates show the phase and remaining shield time, with a warning before scheduled adds.
+**Compact event panel** groups the objective, timer, waves, carried litter and returns under the event name and difficulty. Every mode has **Event HUD** controls for position, width, size, opacity, the timer and progress. Land and Ocean altars have their own controls under **Litter Altars**. Existing display values carry over on the first load. **Show event results** adds a personal summary after the event; it waits while the inventory is open. Boss nameplates show the phase and remaining shield time, with a warning before scheduled adds.
 
 Ready altars glow softly gold, active altars use their biome colour, and cooling altars have dim blue runes. **Show altar readiness** turns these idle colours off.
 
@@ -193,7 +193,9 @@ The dome gives a warning before sealing. Late helpers can enter by default, then
 
 ## Messages and display
 
-**Event popup** controls the banner or minimal style, position, size, width, duration, colors, opacity and animation. **Display** controls the persistent timer, litter and wave tracker separately.
+**Popup HUD** in each mode controls the banner or minimal style, position, size, width, duration, colors, opacity and animation. Short notices fit their message. **Keep clear of event panels** moves notices out of the tracker and results, with an adjustable gap. Turn off **Fit panel to message** to use a fixed width.
+
+HUD changes apply after an admin presses **Apply changes**, including during an active event. Frozen combat settings and named presets do not override these display controls. Per-bin HUD overrides still take priority.
 
 An admin bin can override **Event messages** for entering, leaving, starting and completing its event. Use `{event}` for the bin's name and `{player}` for the entering/leaving player or event starter. Empty text keeps the usual notices. These messages use the event popup settings and are saved separately for each bin.
 
@@ -406,7 +408,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Event boss icon spacing (pixels) | 4 | Space between the Litter Bin and boss icons. Both use the event enemy icon size and opacity. |
 | Tracker horizontal position (%) | 50 | Horizontal center of the event timer, litter and wave tracker. Vertical position uses Top offset. |
 | Tracker size (%) | 100 | Size of the persistent event tracker and wrath meter. |
-| Tracker width | 650 | Maximum width of the event tracker at 1080p. Long text wraps. |
+| Tracker width | 440 | Width of the event tracker at 1080p. Long text wraps. Kept inside the screen. |
 | Tracker background opacity (%) | 15 | Soft background behind the event tracker. Zero hides it. |
 | Show encounter progress | true | Show nearby enemies or litter remaining, and whether your contribution qualifies for rewards. You must still finish alive and nearby; reward cooldowns apply. |
 | Show event timer | true | Show the time left in the nearby encounter. Events continue if their starter dies or leaves, until completed or timed out. |
@@ -620,9 +622,12 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Title | ODIN'S JUDGMENT | Heading above event notices. Leave empty for no heading. |
 | Notice duration (seconds) | 7 | How long each notice stays visible. Includes its short fade in and out. |
 | Horizontal position (%) | 50 | Center of the notice: 0 left, 50 center, 100 right. Kept inside the screen. |
-| Vertical position (%) | 32 | Center of the notice: 0 top, 50 middle, 100 bottom. Separate from the persistent tracker. |
+| Vertical position (%) | 32 | Preferred center: 0 top, 50 middle, 100 bottom. Moves clear of the tracker and results when overlap protection is on. |
 | Size (%) | 100 | Overall notice size, including text and spacing. Adapts to screen resolution. |
-| Width | 620 | Width at 1080p. Longer messages wrap inside the screen. |
+| Width | 620 | Maximum width at 1080p. Longer messages wrap. Turn off Fit panel to message to always use this width. |
+| Fit panel to message | true | Use a smaller panel for short notices. Long notices still use the configured width. |
+| Keep clear of event panels | true | Move notices above or below the event tracker and results so they stay readable. Uses free space beside them when needed. |
+| Space between panels (pixels) | 12 | Minimum space between a notice and other event panels at 1080p. |
 | Text size | 20 | Message text size at 1080p, before the size multiplier. |
 | Background opacity (%) | 45 | Banner background opacity. Zero leaves only the frame and text. |
 | Animate notices | true | Add a short, gentle slide during the fade. |

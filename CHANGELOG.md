@@ -1,8 +1,8 @@
 # 1.5.6
 
 - Tougher presets, better completion loot and guaranteed combat equipment rolls. Added Nightmare and Cataclysm tiers.
-- Capped enemy material drops to reduce large piles of loot.
-- Cleaner event displays, results and boss warnings.
+- Preset combat coins start at 300 and rise with difficulty. Capped enemy material drops.
+- Cleaner displays with separate HUD controls for each mode and altar type. Notices stay clear of the tracker.
 - Added Apply, Discard and Undo for admin settings. Reduced settings lag.
 - Events keep their settings after restarts. Replacing a bin no longer resets its cooldown.
 - Stronger 10–25 minute blessings, equipment reward protection and altar status lights.
