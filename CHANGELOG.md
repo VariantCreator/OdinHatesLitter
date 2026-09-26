@@ -1,3 +1,9 @@
+# 1.5.8
+
+- Lowered Ocean docks. They sink after a 10-second warning and rise again when the event ends.
+- Added `odin_ocean_update` to refresh existing Ocean altars through Upgrade World while keeping their bins and settings.
+- Fixed text fitting in start confirmations and Odin's Judgment popups.
+
 # 1.5.7
 
 - Fixed overlapping event notices and added HUD controls for every mode and altar type.

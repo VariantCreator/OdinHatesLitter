@@ -8,6 +8,7 @@ Odin's wrath, cleanup trials and raids for Valheim. By Dova.
 - Buildable Litter Bins and biome altars for starting events.
 - Enemy waves, mini-bosses and boss raids with phases and reinforcements.
 - Ocean battles, craftable Sea Offerings and floating loot.
+- Ocean altar docks sink during combat after a warning, then rise when the event ends.
 - Personal completion rewards, guaranteed combat equipment rolls in presets, and 10-25 minute stamina, health and Eitr blessings.
 - Event music, weather, boundaries and limited returns after death.
 - Litter Bin icons above event enemies, with a boss icon beside them for bosses and mini-bosses.

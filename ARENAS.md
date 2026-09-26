@@ -6,7 +6,7 @@ Shrines have two layouts per biome. By default, a new world can place up to six 
 
 ## Add them to an existing world
 
-1. Install Odin Hates Litter **1.5.7** on the server and every client.
+1. Install Odin Hates Litter **1.5.8** on the server and every client.
 2. Install **Upgrade World** on the server and the admin client. Keep a world backup before adding locations.
 3. Set the counts under **Litter Altars > World generation**, then run `odin_arenas` in the game console as an admin.
 4. Review Upgrade World's queued operation. Run `start` to apply it.
@@ -44,6 +44,18 @@ Land platforms and decorations fit to the terrain when the shrine loads. An acti
 ## Ocean and removal
 
 Ocean altars use the shared **Litter Altars** settings, with sea controls in its **Ocean** categories. Land litter settings do not apply at sea. Ordinary sea judgments and crafted Sea Offerings keep their separate Ocean settings.
+
+The dock sits half a metre above calm water. When a fight starts, players have **10 seconds to board a boat** before the dock, bin and outer platforms sink. They rise again after a win, timeout or cancellation. A restarted event keeps the dock submerged until the fight ends.
+
+Older Ocean altars adjust when visited. To update all existing Ocean altars with Upgrade World, run these commands as an admin:
+
+```text
+odin_ocean_update
+uw_check
+start
+```
+
+This keeps the same bins, contents, names, settings and cooldowns. Active altars wait until their events finish. It also updates Ocean scenery placed with the spawn command or Infinity Hammer. Land altars and other locations stay unchanged.
 
 Turning generation off keeps existing shrines. To remove one, finish its event, empty the bin and confirm removal in its admin menu. This removes that shrine's bin, scenery, map marker and ground protection. Other shrines stay.
 
