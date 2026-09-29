@@ -80,11 +80,15 @@ All enabled types use **Blessing duration (seconds)** and the same reward cooldo
 
 ## Litter Altars
 
-Biome shrines have a central Litter Bin and two layouts per biome. New worlds can generate up to six shrines per biome by default. For existing worlds, install Upgrade World, run `odin_arenas`, review the queue, then run `start`. See [Arena locations](ARENAS.md) for the location IDs and details.
+Biome shrines have a central Litter Bin and two layouts per biome. New worlds can generate up to six shrines per biome by default. For existing worlds, install Upgrade World, run `odin_arenas`, review the queue, then run `start`. See [Arena locations](https://github.com/VariantCreator/OdinHatesLitter/blob/main/ARENAS.md) for the location IDs and details.
+
+New land altars check the full starting event area for dry ground, lava and uneven terrain. **Maximum ground height difference (metres)** controls the allowed unevenness. These checks apply when placing new altars; they do not move existing altars or flatten terrain. Larger starting event areas can leave fewer suitable sites.
 
 **Litter Altars** contains shared controls for generation, event area, enemies, waves, rewards, litter, atmosphere and messages. Land and Ocean altars keep separate event settings. Existing values carry over on the first load. Changes apply to future altar events; individual bin settings and presets take priority. All settings sync from the server. Ocean altars use sea combat without litter collection, with a radius of 160 metres. Land altars use 40 metres. Changing the event radius does not move the decorations.
 
 Land altar defaults are 200% litter size, no glow ring, and 12 piles plus 10 per player, including the starter. That means 22 solo or 32 with two players, up to the group cap of 100. Altars wait 45 minutes after an event ends.
+
+Open **General and display > Altar journal** in F1, or use `odin_journal` in the console. It lists altars you have discovered on your map, their difficulty, offering cost, event length, distance and readiness. Cooldowns update while it is open. **Show on map** opens that altar's location. Your last altar result is saved with your character. An unavailable bin needs a visit before its details can be shown.
 
 **Litter fills the event area** spreads piles across the event radius, leaving two metres inside the boundary. Turn it off to use the shared minimum and maximum distances, or set a distance on an individual bin. Old factory distances switch to this shared default; custom distances remain.
 
@@ -185,6 +189,10 @@ Wacky MMO enemy and boss XP have separate **0-500%** settings in each mode and b
 
 Wrath gives two minutes to clean up by default. Trial timing is separate. Adjust litter count, size, glow, inner/outer radius, spacing, terrain and plant checks. Mission litter stacks to 50 before stack-size mods.
 
+The event tracker shows your contribution against its targets: damage, returned litter, blocked damage and Ocean crew time where enabled. Meeting any one enabled target qualifies you for a reward when you finish alive inside the event. Helper reward permissions, return limits and reward cooldowns still apply. Start confirmations warn about a running reward cooldown before you spend an offering.
+
+**Participation > Reward support actions** is on by default. Blocking 40 points of actual damage from event enemies meets the default support target. A trusted server integration can also credit healing another player when the server verifies restored health after recent event damage. Ordinary regeneration, self-healing and healing with no known source do not count. Healing mods are not detected automatically. Each mode, altar and bin can set its own support target.
+
 Late helpers add litter only while required piles remain unfound. Each player increases the target at most once; rejoining does not add more. The total remains capped at 100. Replacement piles help when pickups stop, using the configured delay and placement rules. The counter includes litter carried by other participants.
 
 Three returns mean the starting life plus three revives or respawns. A fourth death locks the player out until the event ends. Resurrection uses the same allowance. Reconnecting does not reset it. Graves can be recovered after the event.
@@ -192,6 +200,22 @@ Three returns mean the starting life plus three revives or respawns. A fourth de
 The dome gives a warning before sealing. Late helpers can enter by default, then must stay. Boat and player participation at sea use horizontal distance, so waves do not push the crew outside the event. Music, weather, object protection and the dome follow the event timer.
 
 **Event rules** controls overlap, outside hostiles, group scaling and what happens when the area is empty: continue, pause or end. Player tames are left alone. Wild enemies return to normal behavior when the event ends. Events save their objectives, waves, phases, return counts and remaining time. Time pauses while the server is offline. Back up `BepInEx/config/Dova.OdinHatesLitter.events` with the world.
+
+### Cleanup variety
+
+**Cleanup variety** is available for Wrath and Cleanup Trial, including land altars and individual bin overrides. It is off by default. When enabled, new piles have a 20% heavy share, 15% cursed share and 10% bonus share; the rest are ordinary. Set a share to zero to disable that type. Shares over 100% are reduced proportionally. Existing piles and their replacements keep their type.
+
+- **Heavy litter** reduces movement speed by 20% while carried. Several heavy piles use the same penalty. The setting allows 0–35%; returning or dropping the litter removes it. Heavy piles appear only when returning litter is required.
+- **Cursed litter** requests one extra enemy per successful pickup, with a default limit of six per event. These enemies arrive during combat and follow all living and total enemy limits. Completing peaceful cleanup clears the requests. Cursed litter adds no bosses or extra wave requirements.
+- **Bonus litter** earns the depositor ten extra coins per pile, up to 30 per player and 60 across the event. When returning is disabled, the collector gets the credit. Coins arrive with a qualifying completion reward; failed events and reward cooldowns do not pay them. Set either coin limit to zero to disable the bonus.
+
+Each type keeps the event's litter identity and stack size. Trading litter or recovering it from a grave still credits the player who returns it. Bonus credit and extra-enemy limits survive a server restart.
+
+### Enemy recovery and spawn limits
+
+Each event mode and altar type has an **Enemy recovery** category. Recovery is enabled by default: enemies that stay underground or too far beyond the circle for 90 seconds can return to a safe spot. Movement, health changes, recent attacks and a nearby opponent postpone recovery. The move keeps health, loot and event identity. Sea creatures use the seabed when checking depth. Admins can mark remaining enemies on their map or request a return from Event management; combat protection still applies.
+
+Spawn controls in **Admin and server > Server** apply across all events. The default limit is **128 living event enemies**, including bosses and cursed enemies. Waves wait for room; a wave larger than the server limit is reduced to fit. Work updates try **two creatures every 0.1 seconds**, stopping before another attempt when the **2-millisecond** work budget is used. One creature may take longer than that budget. Event limits still apply, and ordinary wild creatures keep their usual spawning.
 
 ## Messages and display
 
@@ -204,6 +228,8 @@ An admin bin can override **Event messages** for entering, leaving, starting and
 ## Admin tools
 
 Refresh the live event list to see remaining time and participants. Choose a connected player, mode and timer to reset just that cooldown. **Next judgment** applies to Wrath and Ocean Battle. Resetting a cooldown keeps active events and return counts. A bin's own cooldown reset is in its admin panel.
+
+**Inspect event** shows what the event is waiting for, its remaining enemies, litter and waves, each player's contribution and reward eligibility, and the settings used at the start. **Show effective settings** includes their source and any bin overrides. **Locate remaining enemies** adds map markers for 60 seconds. **Return remaining enemies to arena** requires a second press and keeps the same combat protection as automatic recovery.
 
 Cancellation requires confirmation and can return the offering when it is still available. Save named presets, copy modes, reset one category, or check configured enemies and loot. Recent event and reward actions appear in history. Detailed logs are in the Server section.
 
@@ -388,6 +414,22 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Give rewards for peaceful cleanup | true | Reward each qualifying helper when all litter is returned before enemies arrive. Uses cleanup items, chance, multiplier and cooldown, plus Odin's Forgiveness. |
 
 
+### Cleanup variety
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Enable cleanup variety | false | Add heavy, cursed and bonus piles to land cleanup events. Off keeps ordinary litter. These choices are saved when an event starts. |
+| Heavy piles (%) | 20 | Share of new piles using this type. Zero disables it. If the three shares total more than 100%, they are reduced proportionally. Replacement piles keep their original type. Heavy piles are used only when litter must be returned to a bin. |
+| Heavy litter movement penalty (%) | 20 | Reduce movement speed while carrying heavy mission litter. Carrying several piles uses the same penalty. Returning or dropping them removes it. Ordinary dropped items are unaffected. |
+| Cursed piles (%) | 15 | Share of new piles using this type. Zero disables it. If the three shares total more than 100%, they are reduced proportionally. Replacement piles keep their original type. |
+| Enemies per cursed pile | 1 | Extra enemies requested after a successful cursed pickup, arriving once combat begins. Finishing peaceful cleanup clears these requests. The event's living and total enemy limits and the server limit still apply. No extra bosses. |
+| Cursed enemy limit per event | 6 | Maximum extra enemies requested by cursed piles across the event. Zero disables cursed reinforcements. |
+| Bonus piles (%) | 10 | Share of new piles using this type. Zero disables it. If the three shares total more than 100%, they are reduced proportionally. Replacement piles keep their original type. |
+| Coins per bonus pile | 10 | Extra coins credited to the player who returns a bonus pile, or collects it when returning is disabled. Paid only with a qualifying completion reward. Reward cooldowns still apply. |
+| Bonus coin limit per player | 30 | Maximum extra coins one participant can earn in one event. Zero disables bonus coins. |
+| Bonus coin limit per event | 60 | Maximum extra coins earned by all participants combined in one event. The first accepted deposits receive available bonus credit. Zero disables bonus coins. |
+
+
 ### Combat rewards
 
 | Setting | Default | What it does |
@@ -468,6 +510,18 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Automatic creature variety | 3 | Number of eligible creature types in the automatic pool, starting with the weakest. Zero uses every eligible type. An explicit biome list replaces the automatic pool. |
 | Minimum spawn distance (metres) | 18 | Nearest distance from the event centre for enemy spawns. Ocean uses at least 25 metres. |
 | Maximum spawn distance (metres) | 26 | Farthest enemy spawn distance. Kept inside the event area. Ocean uses at least 38 metres. |
+
+
+### Enemy recovery
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Recover stranded enemies | true | Return event enemies that remain underground or far outside the circle. Ordinary idle enemies stay where they are. Recent attacks, movement and damage postpone recovery. |
+| Stranded time before recovery (seconds) | 90 | An enemy must remain in an invalid position without moving or changing health for this long. Recovery keeps its health, drops and event identity. |
+| Check stranded enemies every (seconds) | 5 | Time between server checks for this event. A failed recovery waits at least another 15 seconds before retrying. |
+| Allowed distance beyond circle (metres) | 20 | Enemies farther than this beyond the event boundary can be recovered after the stranded delay. Enemies moving back are left alone. |
+| Allowed depth below ground (metres) | 3 | How far below loaded terrain an event enemy must be before it counts as stranded. Sea creatures are compared with the seabed, not the water surface. |
+| Wait after enemy attacks (seconds) | 20 | Recovery waits after an enemy attack and while it can see a nearby opponent. The admin Return to arena button uses the same combat protection. |
 
 
 ### Enemy waves
@@ -794,6 +848,8 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Returns allowed per event | 3 | Three allows the starting life and three returns. The fourth death ends participation. Zero locks a player out on their first death. Leaving or reconnecting does not restore returns. Each new event starts fresh. |
 | Damage needed for rewards | 20 | Total damage to judgment enemies needed to qualify. Alternatively, return the required number of mission litter piles. |
 | Litter stacks needed for rewards | 1 | Cleaned piles needed to qualify instead of dealing damage. When Return litter to the bin is on, a pile counts only after depositing it. Each pile counts once. |
+| Reward support actions | true | Allow blocked event damage and healing from supported server mods to count toward rewards. Healing must come from another player and repair recent event damage. Self-healing and normal regeneration do not count. Helper rules and reward cooldowns still apply. |
+| Support needed for rewards | 40 | Damage blocked and health restored needed instead of damage dealt or litter returned. Healing counts only when a supported server mod can identify who cast it. Players must be alive inside the active event. |
 
 
 ### Raid boss
@@ -863,6 +919,10 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 
 | Setting | Default | What it does |
 | --- | --- | --- |
+| Maximum living event enemies | 128 | Living enemies allowed across all Odin events, including bosses and cursed litter. Waves wait for room. A wave larger than this limit is reduced to fit. Wild creatures are unaffected. |
+| Enemies spawned per update | 2 | Maximum creature spawn attempts in one work update. Smaller batches reduce pauses when several events are active. |
+| Time between spawn updates (seconds) | .1 | Time between small spawn batches. All waves and boss reinforcements use this queue. |
+| Spawn work budget (milliseconds) | 2 | Stop starting more spawns when this time budget is used. A single creature may take longer. This does not reduce the server's frame rate or change normal creatures. |
 | Maximum simultaneous events | 8 | Server-wide event limit. New events wait until a slot is available. |
 | Prevent overlapping event areas | true | Keep event circles apart so their domes and objectives do not conflict. |
 | Event announcement destination | Automatic | Send event starts and results through an installed server mod. Automatic uses Discord Connector when installed, otherwise ServerGuard. Both sends through both integrations. Variant Announcements keeps its separate in-game notices. Requires the chosen mod's server webhook and event messages to be enabled. |
@@ -893,13 +953,13 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Generate arena locations | true | Place biome shrines with a Litter Bin in new worlds. Use Upgrade World to add them to existing worlds. Turning this off keeps existing arenas. |
+| Generate arena locations | true | Place biome shrines with a Litter Bin in new worlds. New land altars need dry ground without lava across their full starting event area. Use Upgrade World to add them to existing worlds. Existing altars stay where they are. |
 | Show discovered arenas on the map | true | Reveal each arena's map marker when it is discovered. Does not reveal undiscovered shrines. |
 | Protect arena ground | true | Block ordinary building and digging inside land arenas. Does not change terrain. Reload the area after changing this. Admin terrain tools may bypass it. |
 | Light the shrine during events | true | Light the rune carvings and braziers in sequence when a shrine event begins. |
 | Minimum distance between arenas (metres) | 600 | Minimum spacing between generated arenas. Applies to future location placement. |
 | Minimum distance from world centre (metres) | 700 | Keep generated arenas away from the starting area. Applies to future location placement. |
-| Maximum ground height difference (metres) | 3 | Prefer reasonably level land across the arena. No flattening is applied. Higher values allow more uneven sites. |
+| Maximum ground height difference (metres) | 3 | Maximum height difference across a new land altar's full starting event area. No flattening is applied. Higher values allow more uneven sites. Existing altars are unchanged. |
 | Starting land event radius (metres) | 40 | Shared radius for land altar events. Applies to existing altars too. A radius set on an individual bin takes priority. Does not move the altar decorations. |
 | Starting ocean event radius (metres) | 160 | Shared sailing radius for ocean altars. A radius set on an individual bin takes priority. |
 | Litter fills the event area | true | Spread altar litter across the full event radius, leaving two metres inside the boundary. A bin's own maximum litter distance takes priority. Off uses the Litter placement distances. Ocean altars have no litter. |

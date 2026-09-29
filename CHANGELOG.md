@@ -1,3 +1,14 @@
+# 1.5.9
+
+- Fixed documentation links in mod managers.
+- Added stranded enemy recovery and admin controls to locate them or return them to the arena.
+- Added personal contribution targets, reward cooldown warnings and credit for blocking event attacks.
+- Added a discovered altar journal with readiness, difficulty and recent results.
+- Added optional heavy, cursed and bonus litter with capped extra enemies and coins.
+- Spread enemy spawns into small batches with a shared server limit.
+- Added event inspection for remaining enemies, reward eligibility and effective settings.
+- New land altars check the full starting event area for dry ground, lava and uneven terrain. Existing altars stay in place.
+
 # 1.5.8
 
 - Lowered Ocean docks. They sink after a 10-second warning and rise again when the event ends.
