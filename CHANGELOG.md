@@ -1,3 +1,12 @@
+# 1.6.0
+
+- Better cleanup payouts, gentler litter variety and fairer late joins.
+- Added next-wave ready votes and cashout checkpoints for Endless raids.
+- Added boss guards, short shields and elemental phase attacks.
+- Hard Boss and Endless victories offer two equipment choices; keep one.
+- Stronger blessings stay active. Equipment repeat history carries between modes.
+- Added an admin config reset with confirmation and Undo.
+
 # 1.5.9
 
 - Fixed documentation links in mod managers.

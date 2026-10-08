@@ -10,7 +10,7 @@ Install the same build on the server and every client. Server settings sync auto
 | --- | --- |
 | Wrath | Dropping items builds wrath. Odin gives players time to clean up before enemies arrive. |
 | Cleanup Trial | A bin offering starts a litter collection event with enemies. |
-| Endless Raid | Combat waves continue until the timer ends, unless you choose another wave rule. |
+| Endless Raid | Combat waves, with checkpoints and a final wave when the enemy budget is used. |
 | Ocean Battle | Sea combat with its own enemies, sailing radius, waves and rewards. No litter collection. |
 | Ocean Endless Raid | A crafted Sea Offering starts a separate sea raid. Survival waves by default. |
 | Boss Raid | A chosen boss, with optional phases and reinforcements. |
@@ -48,7 +48,21 @@ Open **Presets** inside an event folder or **Litter Altars**. Choose **Relaxed**
 | Nightmare | 3x / 2.05x | 90% / 45% / 90% | 20 minutes | 100% |
 | Cataclysm | 4x / 2.5x | 100% / 50% / 100% | 25 minutes | 100% |
 
-Every preset gives each eligible player coins and materials on completion, plus a **100% roll for one equipment item after combat**. Equipment still needs a valid item in the player's reward pool. Combat presets start at 300 coins per player on Relaxed. Higher tiers pay roughly 400, 500, 650, 800 and 950 before biome bonuses, with a 1,000-coin limit. Coins are adjusted for each mode's reward multiplier. Higher difficulties also give more materials, better rarity odds, and stronger blessings. Peaceful cleanup gives coins, materials and blessings without equipment. Rewards follow each player's progression, and Ancient equipment remains rare.
+Every preset gives each eligible player coins and materials on completion, plus a **100% roll for one equipment item after combat**. Equipment still needs a valid item in the player's reward pool. Combat coins start at 300 on Relaxed, then roughly 400, 500, 650, 800 and 950 before biome bonuses, with a 1,000-coin limit. Peaceful cleanup pays 150, 200, 250, 300, 350 or 400 coins, plus eligible biome bonuses. Its main coin amount is separate from combat scaling. Higher difficulties give more materials, better rarity odds and stronger blessings. Rewards follow each player's progression, and Ancient equipment remains rare.
+
+Nightmare and Cataclysm **Boss Raid**, **Endless Raid** and **Ocean Endless Raid** victories can offer two suitable equipment items. Keep one; the first is kept after 60 seconds. Full inventories keep the chosen item pending until there is room. Equipment repeat history is shared between modes; bad-luck protection remains separate. An easier reward cannot replace a stronger active blessing or refresh its timer.
+
+### Wave controls
+
+After clearing a wave, living participants can vote to start the next one early. The default minimum break is 10 seconds; everyone must agree. Use the wave panel while the inventory is open, or the local F8 shortcut.
+
+Endless modes offer a checkpoint every three cleared waves. Everyone can agree to cash out an earned share of ordinary coins and materials, without equipment or a blessing, or continue fighting. F9 votes for cashout. A 15-second decision window follows the minimum break; the event clock continues. Defeating the full enemy budget finishes the event early with normal rewards.
+
+Late helpers stop adding litter once 75% has been found or only 25% of the timer remains. New helpers still participate; enemy scaling applies to future waves. Land cleanup defaults to 10% heavy, 5% cursed and 10% bonus piles. Each type can be changed or disabled.
+
+### Boss phases
+
+Boss Raid presets select a phase plan for their difficulty. Veteran and higher can summon immediate guards and protect the boss until those guards fall, with a 30-second timeout. Phase controls include elemental attack bonuses and health refills. Custom bin phase plans keep their own values.
 
 Whole-event presets cover timing, cooldowns, solo and group counts, waves, mini-bosses, health, damage, sizes, enemy drops, completion loot, equipment, modded supplies, XP, blessings, participation, lives, litter, placement, atmosphere and notices. Each mode keeps only the settings it uses. Appearance and messages return to standard defaults. Server permissions, world generation, individual bin overrides and custom raid phases stay in place.
 
@@ -227,6 +241,8 @@ An admin bin can override **Event messages** for entering, leaving, starting and
 
 ## Admin tools
 
+**Admin and server > Reset all configs** restores all global, mode and altar config settings to the 1.6.0 defaults. Each mode uses Balanced. Press again to confirm within 15 seconds. Saved bins, their own settings, custom presets, cooldowns and active event progress are kept. **Undo last config reset** restores the previous configs during that session, until further settings changes are made.
+
 Refresh the live event list to see remaining time and participants. Choose a connected player, mode and timer to reset just that cooldown. **Next judgment** applies to Wrath and Ocean Battle. Resetting a cooldown keeps active events and return counts. A bin's own cooldown reset is in its admin panel.
 
 **Inspect event** shows what the event is waiting for, its remaining enemies, litter and waves, each player's contribution and reward eligibility, and the settings used at the start. **Show effective settings** includes their source and any bin overrides. **Locate remaining enemies** adds map markers for 60 seconds. **Return remaining enemies to arena** requires a second press and keeps the same combat protection as automatic recovery.
@@ -377,6 +393,8 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Show hints for missing litter | false | After no successful pickup for a while, show a small pulsing golden marker above uncollected piles. Carried litter is never marked. |
 | Time before litter hints (seconds) | 60 | Every successful pickup by any participant restarts this shared hint timer. |
 | Litter hint visibility (metres) | 35 | How close a player must be to see a missing-pile hint. |
+| Stop late-helper litter when found (%) | 75 | Stop adding litter for new helpers once this share of required piles has been found. Zero disables this cutoff. Already found or carried piles are preserved. |
+| Stop late-helper litter with time left (%) | 25 | Stop adding litter for new helpers during this final share of the event timer. Zero disables this cutoff. |
 | Litter glow opacity (%) | 50 | Opacity of the soft gold ring around litter. Zero hides it. Applies to existing litter for everyone. |
 | Litter size (%) | 100 | Size of litter in the world. 100 is normal, 200 is double. Its pickup hitbox scales with it. Applies to existing litter for everyone. |
 | Move hard-to-reach litter | true | When nobody has picked up litter for a while, replace one uncollected ground pile at a time with a new pile near the bin. The required total stays the same. Carried and returned litter is never replaced. |
@@ -409,6 +427,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Setting | Default | What it does |
 | --- | --- | --- |
 | Item amount multiplier | 1 | Scale coins and materials after peaceful cleanup. 1 is normal, 2 is double, and 0 disables these items. Does not change Odin's Forgiveness or equipment chance. |
+| Main coin amount | -1 | Main Coins reward after peaceful cleanup, before the biome coin bonus. This amount is not changed by item multipliers. Use -1 to keep the main reward and cleanup multiplier. Zero disables cleanup main coins. Applies only when the main reward item is Coins; an item multiplier of zero still disables items. |
 | Item reward chance (%) | 100 | Chance for each eligible player to receive the cleanup item bundle. Odin's Forgiveness is separate. |
 | Extra cleanup items | Empty | Extra items in addition to the biome bundle. Example: Honey 2-4 @ 50%. Empty adds nothing. |
 | Give rewards for peaceful cleanup | true | Reward each qualifying helper when all litter is returned before enemies arrive. Uses cleanup items, chance, multiplier and cooldown, plus Odin's Forgiveness. |
@@ -418,10 +437,10 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 
 | Setting | Default | What it does |
 | --- | --- | --- |
-| Enable cleanup variety | false | Add heavy, cursed and bonus piles to land cleanup events. Off keeps ordinary litter. These choices are saved when an event starts. |
-| Heavy piles (%) | 20 | Share of new piles using this type. Zero disables it. If the three shares total more than 100%, they are reduced proportionally. Replacement piles keep their original type. Heavy piles are used only when litter must be returned to a bin. |
+| Enable cleanup variety | true | Add heavy, cursed and bonus piles to land cleanup events. Off keeps ordinary litter. These choices are saved when an event starts. |
+| Heavy piles (%) | 10 | Share of new piles using this type. Zero disables it. If the three shares total more than 100%, they are reduced proportionally. Replacement piles keep their original type. Heavy piles are used only when litter must be returned to a bin. |
 | Heavy litter movement penalty (%) | 20 | Reduce movement speed while carrying heavy mission litter. Carrying several piles uses the same penalty. Returning or dropping them removes it. Ordinary dropped items are unaffected. |
-| Cursed piles (%) | 15 | Share of new piles using this type. Zero disables it. If the three shares total more than 100%, they are reduced proportionally. Replacement piles keep their original type. |
+| Cursed piles (%) | 5 | Share of new piles using this type. Zero disables it. If the three shares total more than 100%, they are reduced proportionally. Replacement piles keep their original type. |
 | Enemies per cursed pile | 1 | Extra enemies requested after a successful cursed pickup, arriving once combat begins. Finishing peaceful cleanup clears these requests. The event's living and total enemy limits and the server limit still apply. No extra bosses. |
 | Cursed enemy limit per event | 6 | Maximum extra enemies requested by cursed piles across the event. Zero disables cursed reinforcements. |
 | Bonus piles (%) | 10 | Share of new piles using this type. Zero disables it. If the three shares total more than 100%, they are reduced proportionally. Replacement piles keep their original type. |
@@ -486,6 +505,15 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Encounter cooldown (seconds) | 300 | Controls the Next judgment countdown. Wait after an event ends before Odin can return. Saved across restarts and paused while the server is offline. Zero removes this wait; active events must still finish first. |
 | Delay before Odin appears (seconds) | 0 | Wait this long after reaching the wrath threshold before Odin can appear. Zero means immediately. Cleaning below the threshold restarts this delay. This is separate from the pickup grace period and final warning. |
 | Encounter time limit (seconds) | 600 | Maximum time to finish an encounter and earn rewards, including Odin's warning. |
+
+
+### Endless checkpoints
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Allow checkpoint cashout | true | After a checkpoint wave, all living participants may agree to finish with an earned share of ordinary rewards. No equipment or blessing is awarded for cashout. Otherwise waves continue after the decision window. |
+| Waves between checkpoints | 3 | Offer a cashout after this many fully cleared waves in Survive timer mode. Required cleanup must also be finished. Clearing the event's full enemy budget awards normal completion. |
+| Checkpoint decision time (seconds) | 15 | Keep a checkpoint open for this long after the minimum rest. All living participants can vote Continue to end the break early. The event timer keeps running. |
 
 
 ### Enemies
@@ -562,6 +590,8 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Equipment chance added per miss (%) | 5 | Percentage points added for each further missed equipment reward. A successful equipment reward resets the bonus. |
 | Maximum equipment chance bonus (%) | 25 | Maximum bonus from missed equipment rolls. Total chance never exceeds 100%; rarity and progression rules stay the same. |
 | Recent equipment to remember | 5 | Equipment remembered per player, mode, reward tier and difficulty when Avoid recent equipment repeats is enabled. Survives server restarts; repeats remain possible if the pool has no alternatives. |
+| Choose equipment after hard victories | true | After Nightmare or Cataclysm Boss and Endless victories, choose one of two eligible equipment rolls. Requires Epic Loot. Other completion rewards arrive immediately. Timed-out choices keep the first item; undelivered equipment waits for reconnect or inventory space. |
+| Equipment choice time (seconds) | 60 | Time to choose equipment after a hard victory. Open the inventory to see both items. When time ends the first item is kept. Disconnecting does not reroll or restart this timer. |
 
 
 ### Epic Loot materials
@@ -836,7 +866,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Wait for the current wave to die | true | On prevents overlapping sea waves. Off allows new waves while serpents remain, up to the alive limit. |
 | Extra enemies each wave | 0 | Additional sea enemies per later wave. Zero keeps each wave at the normal Ocean group-scaled count. Ocean serpent limits still apply. |
 | Maximum living enemies | 6 | Maximum living event enemies in one sea battle. Does not change land limits. |
-| Maximum enemies per event | 100 | Total sea enemies across all waves. Survive timer still lasts until the timer ends when this cap is reached. |
+| Maximum enemies per event | 100 | Total sea enemies across all waves. Defeating the full enemy budget completes the battle early, including Survive timer mode. |
 | Stop new waves near the end (seconds) | 15 | Do not start another sea wave with less than this much event time remaining. |
 
 
@@ -857,6 +887,7 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | Setting | Default | What it does |
 | --- | --- | --- |
 | Boss stars | -1 | -1 uses normal CLLC/repeat-offender levels. 0 is no stars. Positive values force this many stars before health multipliers. |
+| Boss phase preset | Single phase | Choose a phase plan for bosses without custom bin phases. Higher tiers add guards and stronger attacks. Boss stars and CLLC controls set the opening attributes. Custom bin phases keep their own settings. |
 | CLLC creature effect | Automatic | For raid bosses made from ordinary creatures. Splitting is excluded to keep event ownership and counts reliable. |
 | CLLC infusion | Automatic | Applies a loaded CLLC infusion. Automatic keeps CLLC's roll; None removes it. CLLC must enable infusions. |
 | CLLC boss affix | Automatic | For true boss creatures. Clone/summoner affixes are excluded; use the tracked reinforcement settings for adds. CLLC must enable boss affixes. |
@@ -947,6 +978,14 @@ Defaults apply to new configs. Existing custom values are kept. Event settings b
 | First boss wave | 1 | First wave that may include a boss. |
 | Waves between bosses | 1 | One means every wave; three means every third wave after First boss wave. |
 | Boss health multiplier | 1 | Additional health multiplier for wave bosses. One preserves their normal strength and CLLC level. Event bosses do not unlock world progression or start a separate boss event. |
+
+
+### Wave pacing
+
+| Setting | Default | What it does |
+| --- | --- | --- |
+| Allow next-wave votes | true | After clearing a wave, all living participants can agree to begin the next one early. Normal wave timing continues if anyone waits. |
+| Minimum rest before a vote (seconds) | 10 | Minimum break after clearing a wave before ready or checkpoint votes are accepted. Does not delay the normal wave schedule. |
 
 
 ### World arenas
