@@ -1,3 +1,7 @@
+# 1.6.1
+
+* New Sea Offering model and matching icon.
+
 # 1.6.0
 
 - Better cleanup payouts, gentler litter variety and fairer late joins.

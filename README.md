@@ -43,7 +43,7 @@ Event progress and starting settings are saved. Cooldowns begin when events end,
 - Inspect active events, locate stranded enemies with admin map markers and return them to the arena.
 - Automatic recovery helps events finish when enemies become stranded.
 - Small spawn batches and a shared server limit control the number of living event enemies.
-- **Reset all configs** restores the 1.6.0 defaults and Balanced mode settings, with confirmation and Undo. Saved bins, presets and cooldowns are kept.
+- **Reset all configs** restores the default settings and Balanced mode settings, with confirmation and Undo. Saved bins, presets and cooldowns are kept.
 
 ## 🚀 Get started
 
@@ -54,6 +54,8 @@ Use a Litter Bin with **Alt + E**, then press again to confirm.
 **Take an offering to sea**
 
 Craft a **Sea Offering** and use the same two-step confirmation while at sea.
+
+Sea Offerings have their own model and matching inventory icon. WeaverEditor is not needed.
 
 **Open your altar journal**
 
